@@ -1,0 +1,966 @@
+
+	
+Simatic
+AxSimatic
+Mocks
+Simatic.Ax
+dummy
+AxUnit
+AssertAxUnit
+MockingAxUnit»B¸
+&
+Simatic.Ax.MocksOffDelayMock_false]
+
+Simatic.Ax.MocksiecTimer";9
+)
+Simatic.Ax.MocksARRAY [0..27] OF BYTE
+BYTE+
+
+Simatic.Ax.Mocksduration"	
+LTIME(
+
+Simatic.Ax.Mockssignal"
+BOOL(
+
+Simatic.Ax.Mocksoutput"
+BOOL.
+
+Simatic.Ax.MockselapsedTime"	
+LTIMEºB·
+%
+Simatic.Ax.MocksOffDelayMock_true]
+
+Simatic.Ax.MocksiecTimer";9
+)
+Simatic.Ax.MocksARRAY [0..27] OF BYTE
+BYTE+
+
+Simatic.Ax.Mocksduration"	
+LTIME(
+
+Simatic.Ax.Mockssignal"
+BOOL(
+
+Simatic.Ax.Mocksoutput"
+BOOL.
+
+Simatic.Ax.MockselapsedTime"	
+LTIMEºB·
+%
+Simatic.Ax.MocksOnDelayMock_false]
+
+Simatic.Ax.MocksiecTimer";9
+)
+Simatic.Ax.MocksARRAY [0..27] OF BYTE
+BYTE+
+
+Simatic.Ax.Mocksduration"	
+LTIME(
+
+Simatic.Ax.Mockssignal"
+BOOL(
+
+Simatic.Ax.Mocksoutput"
+BOOL.
+
+Simatic.Ax.MockselapsedTime"	
+LTIME¹B¶
+$
+Simatic.Ax.MocksOnDelayMock_true]
+
+Simatic.Ax.MocksiecTimer";9
+)
+Simatic.Ax.MocksARRAY [0..27] OF BYTE
+BYTE+
+
+Simatic.Ax.Mocksduration"	
+LTIME(
+
+Simatic.Ax.Mockssignal"
+BOOL(
+
+Simatic.Ax.Mocksoutput"
+BOOL.
+
+Simatic.Ax.MockselapsedTime"	
+LTIME2
+
+AxUnit.MockingIPayload*
+
+dummyMyTest"
+Test*f
+
+AxUnit.AssertEqual&
+
+AxUnit.Assertexpected"
+INT$
+
+AxUnit.Assertactual"
+INT*h
+
+AxUnit.AssertEqual'
+
+AxUnit.Assertexpected"
+SINT%
+
+AxUnit.Assertactual"
+SINT*h
+
+AxUnit.AssertEqual'
+
+AxUnit.Assertexpected"
+DINT%
+
+AxUnit.Assertactual"
+DINT*h
+
+AxUnit.AssertEqual'
+
+AxUnit.Assertexpected"
+LINT%
+
+AxUnit.Assertactual"
+LINT*j
+
+AxUnit.AssertEqual(
+
+AxUnit.Assertexpected"	
+USINT&
+
+AxUnit.Assertactual"	
+USINT*h
+
+AxUnit.AssertEqual'
+
+AxUnit.Assertexpected"
+UINT%
+
+AxUnit.Assertactual"
+UINT*j
+
+AxUnit.AssertEqual(
+
+AxUnit.Assertexpected"	
+UDINT&
+
+AxUnit.Assertactual"	
+UDINT*j
+
+AxUnit.AssertEqual(
+
+AxUnit.Assertexpected"	
+ULINT&
+
+AxUnit.Assertactual"	
+ULINT*h
+
+AxUnit.AssertEqual'
+
+AxUnit.Assertexpected"
+REAL%
+
+AxUnit.Assertactual"
+REAL*j
+
+AxUnit.AssertEqual(
+
+AxUnit.Assertexpected"	
+LREAL&
+
+AxUnit.Assertactual"	
+LREAL*h
+
+AxUnit.AssertEqual'
+
+AxUnit.Assertexpected"
+BOOL%
+
+AxUnit.Assertactual"
+BOOL*h
+
+AxUnit.AssertEqual'
+
+AxUnit.Assertexpected"
+BYTE%
+
+AxUnit.Assertactual"
+BYTE*h
+
+AxUnit.AssertEqual'
+
+AxUnit.Assertexpected"
+WORD%
+
+AxUnit.Assertactual"
+WORD*j
+
+AxUnit.AssertEqual(
+
+AxUnit.Assertexpected"	
+DWORD&
+
+AxUnit.Assertactual"	
+DWORD*j
+
+AxUnit.AssertEqual(
+
+AxUnit.Assertexpected"	
+LWORD&
+
+AxUnit.Assertactual"	
+LWORD*l
+
+AxUnit.AssertEqual)
+
+AxUnit.Assertexpected"
+
+STRING'
+
+AxUnit.Assertactual"
+
+STRING*n
+
+AxUnit.AssertEqual*
+
+AxUnit.Assertexpected"
+	WSTRING(
+
+AxUnit.Assertactual"
+	WSTRING*i
+
+AxUnit.AssertNotEqual&
+
+AxUnit.Assertexpected"
+INT$
+
+AxUnit.Assertactual"
+INT*k
+
+AxUnit.AssertNotEqual'
+
+AxUnit.Assertexpected"
+SINT%
+
+AxUnit.Assertactual"
+SINT*k
+
+AxUnit.AssertNotEqual'
+
+AxUnit.Assertexpected"
+DINT%
+
+AxUnit.Assertactual"
+DINT*k
+
+AxUnit.AssertNotEqual'
+
+AxUnit.Assertexpected"
+LINT%
+
+AxUnit.Assertactual"
+LINT*m
+
+AxUnit.AssertNotEqual(
+
+AxUnit.Assertexpected"	
+USINT&
+
+AxUnit.Assertactual"	
+USINT*k
+
+AxUnit.AssertNotEqual'
+
+AxUnit.Assertexpected"
+UINT%
+
+AxUnit.Assertactual"
+UINT*m
+
+AxUnit.AssertNotEqual(
+
+AxUnit.Assertexpected"	
+UDINT&
+
+AxUnit.Assertactual"	
+UDINT*m
+
+AxUnit.AssertNotEqual(
+
+AxUnit.Assertexpected"	
+ULINT&
+
+AxUnit.Assertactual"	
+ULINT*k
+
+AxUnit.AssertNotEqual'
+
+AxUnit.Assertexpected"
+REAL%
+
+AxUnit.Assertactual"
+REAL*m
+
+AxUnit.AssertNotEqual(
+
+AxUnit.Assertexpected"	
+LREAL&
+
+AxUnit.Assertactual"	
+LREAL*k
+
+AxUnit.AssertNotEqual'
+
+AxUnit.Assertexpected"
+BOOL%
+
+AxUnit.Assertactual"
+BOOL*k
+
+AxUnit.AssertNotEqual'
+
+AxUnit.Assertexpected"
+BYTE%
+
+AxUnit.Assertactual"
+BYTE*k
+
+AxUnit.AssertNotEqual'
+
+AxUnit.Assertexpected"
+WORD%
+
+AxUnit.Assertactual"
+WORD*m
+
+AxUnit.AssertNotEqual(
+
+AxUnit.Assertexpected"	
+DWORD&
+
+AxUnit.Assertactual"	
+DWORD*m
+
+AxUnit.AssertNotEqual(
+
+AxUnit.Assertexpected"	
+LWORD&
+
+AxUnit.Assertactual"	
+LWORD*o
+
+AxUnit.AssertNotEqual)
+
+AxUnit.Assertexpected"
+
+STRING'
+
+AxUnit.Assertactual"
+
+STRING*q
+
+AxUnit.AssertNotEqual*
+
+AxUnit.Assertexpected"
+	WSTRING(
+
+AxUnit.Assertactual"
+	WSTRING*g
+
+AxUnit.AssertGreaterThan"
+
+AxUnit.Assertleft"
+INT#
+
+AxUnit.Assertright"
+INT*i
+
+AxUnit.AssertGreaterThan#
+
+AxUnit.Assertleft"
+SINT$
+
+AxUnit.Assertright"
+SINT*i
+
+AxUnit.AssertGreaterThan#
+
+AxUnit.Assertleft"
+DINT$
+
+AxUnit.Assertright"
+DINT*i
+
+AxUnit.AssertGreaterThan#
+
+AxUnit.Assertleft"
+LINT$
+
+AxUnit.Assertright"
+LINT*k
+
+AxUnit.AssertGreaterThan$
+
+AxUnit.Assertleft"	
+USINT%
+
+AxUnit.Assertright"	
+USINT*i
+
+AxUnit.AssertGreaterThan#
+
+AxUnit.Assertleft"
+UINT$
+
+AxUnit.Assertright"
+UINT*k
+
+AxUnit.AssertGreaterThan$
+
+AxUnit.Assertleft"	
+UDINT%
+
+AxUnit.Assertright"	
+UDINT*k
+
+AxUnit.AssertGreaterThan$
+
+AxUnit.Assertleft"	
+ULINT%
+
+AxUnit.Assertright"	
+ULINT*i
+
+AxUnit.AssertGreaterThan#
+
+AxUnit.Assertleft"
+REAL$
+
+AxUnit.Assertright"
+REAL*k
+
+AxUnit.AssertGreaterThan$
+
+AxUnit.Assertleft"	
+LREAL%
+
+AxUnit.Assertright"	
+LREAL*d
+
+AxUnit.AssertLessThan"
+
+AxUnit.Assertleft"
+INT#
+
+AxUnit.Assertright"
+INT*f
+
+AxUnit.AssertLessThan#
+
+AxUnit.Assertleft"
+SINT$
+
+AxUnit.Assertright"
+SINT*f
+
+AxUnit.AssertLessThan#
+
+AxUnit.Assertleft"
+DINT$
+
+AxUnit.Assertright"
+DINT*f
+
+AxUnit.AssertLessThan#
+
+AxUnit.Assertleft"
+LINT$
+
+AxUnit.Assertright"
+LINT*h
+
+AxUnit.AssertLessThan$
+
+AxUnit.Assertleft"	
+USINT%
+
+AxUnit.Assertright"	
+USINT*f
+
+AxUnit.AssertLessThan#
+
+AxUnit.Assertleft"
+UINT$
+
+AxUnit.Assertright"
+UINT*h
+
+AxUnit.AssertLessThan$
+
+AxUnit.Assertleft"	
+UDINT%
+
+AxUnit.Assertright"	
+UDINT*h
+
+AxUnit.AssertLessThan$
+
+AxUnit.Assertleft"	
+ULINT%
+
+AxUnit.Assertright"	
+ULINT*f
+
+AxUnit.AssertLessThan#
+
+AxUnit.Assertleft"
+REAL$
+
+AxUnit.Assertright"
+REAL*h
+
+AxUnit.AssertLessThan$
+
+AxUnit.Assertleft"	
+LREAL%
+
+AxUnit.Assertright"	
+LREAL*Ë
+
+AxUnitWriteToArray
+
+AxUnitoffset"
+UINTB
+
+AxUnitvalue"-+
+
+AxUnitARRAY [*] OF BYTE
+BYTEC
+
+AxUnitbuffer"-+
+
+AxUnitARRAY [*] OF BYTE
+BYTE"
+UINT*¦
+
+AxUnitWriteToArray
+
+AxUnitoffset"
+UINT
+
+AxUnitvalue"
+BOOLC
+
+AxUnitbuffer"-+
+
+AxUnitARRAY [*] OF BYTE
+BYTE"
+UINT*¦
+
+AxUnitWriteToArray
+
+AxUnitoffset"
+UINT
+
+AxUnitvalue"
+WORDC
+
+AxUnitbuffer"-+
+
+AxUnitARRAY [*] OF BYTE
+BYTE"
+UINT*§
+
+AxUnitWriteToArray
+
+AxUnitoffset"
+UINT
+
+AxUnitvalue"	
+DWORDC
+
+AxUnitbuffer"-+
+
+AxUnitARRAY [*] OF BYTE
+BYTE"
+UINT*§
+
+AxUnitWriteToArray
+
+AxUnitoffset"
+UINT
+
+AxUnitvalue"	
+LWORDC
+
+AxUnitbuffer"-+
+
+AxUnitARRAY [*] OF BYTE
+BYTE"
+UINT*¦
+
+AxUnitWriteToArray
+
+AxUnitoffset"
+UINT
+
+AxUnitvalue"
+BYTEC
+
+AxUnitbuffer"-+
+
+AxUnitARRAY [*] OF BYTE
+BYTE"
+UINT*¦
+
+AxUnitWriteToArray
+
+AxUnitoffset"
+UINT
+
+AxUnitvalue"
+SINTC
+
+AxUnitbuffer"-+
+
+AxUnitARRAY [*] OF BYTE
+BYTE"
+UINT*¥
+
+AxUnitWriteToArray
+
+AxUnitoffset"
+UINT
+
+AxUnitvalue"
+INTC
+
+AxUnitbuffer"-+
+
+AxUnitARRAY [*] OF BYTE
+BYTE"
+UINT*¦
+
+AxUnitWriteToArray
+
+AxUnitoffset"
+UINT
+
+AxUnitvalue"
+DINTC
+
+AxUnitbuffer"-+
+
+AxUnitARRAY [*] OF BYTE
+BYTE"
+UINT*¦
+
+AxUnitWriteToArray
+
+AxUnitoffset"
+UINT
+
+AxUnitvalue"
+LINTC
+
+AxUnitbuffer"-+
+
+AxUnitARRAY [*] OF BYTE
+BYTE"
+UINT*§
+
+AxUnitWriteToArray
+
+AxUnitoffset"
+UINT
+
+AxUnitvalue"	
+USINTC
+
+AxUnitbuffer"-+
+
+AxUnitARRAY [*] OF BYTE
+BYTE"
+UINT*¦
+
+AxUnitWriteToArray
+
+AxUnitoffset"
+UINT
+
+AxUnitvalue"
+UINTC
+
+AxUnitbuffer"-+
+
+AxUnitARRAY [*] OF BYTE
+BYTE"
+UINT*§
+
+AxUnitWriteToArray
+
+AxUnitoffset"
+UINT
+
+AxUnitvalue"	
+UDINTC
+
+AxUnitbuffer"-+
+
+AxUnitARRAY [*] OF BYTE
+BYTE"
+UINT*§
+
+AxUnitWriteToArray
+
+AxUnitoffset"
+UINT
+
+AxUnitvalue"	
+ULINTC
+
+AxUnitbuffer"-+
+
+AxUnitARRAY [*] OF BYTE
+BYTE"
+UINT*¦
+
+AxUnitWriteToArray
+
+AxUnitoffset"
+UINT
+
+AxUnitvalue"
+REALC
+
+AxUnitbuffer"-+
+
+AxUnitARRAY [*] OF BYTE
+BYTE"
+UINT*§
+
+AxUnitWriteToArray
+
+AxUnitoffset"
+UINT
+
+AxUnitvalue"	
+LREALC
+
+AxUnitbuffer"-+
+
+AxUnitARRAY [*] OF BYTE
+BYTE"
+UINT*f
+
+AxUnitToByteArray
+
+AxUnitvalue"
+BOOL".,
+
+AxUnitARRAY [0..0] OF BYTE 
+BYTE*f
+
+AxUnitToByteArray
+
+AxUnitvalue"
+BYTE".,
+
+AxUnitARRAY [0..0] OF BYTE 
+BYTE*f
+
+AxUnitToByteArray
+
+AxUnitvalue"
+SINT".,
+
+AxUnitARRAY [0..0] OF BYTE 
+BYTE*g
+
+AxUnitToByteArray
+
+AxUnitvalue"	
+USINT".,
+
+AxUnitARRAY [0..0] OF BYTE 
+BYTE*h
+
+AxUnitToByteArray
+
+AxUnitvalue"
+WORD"0.
+
+AxUnitARRAY [0..1] OF BYTE
+BYTE*i
+
+AxUnitToByteArray
+
+AxUnitvalue"	
+DWORD"0.
+
+AxUnitARRAY [0..3] OF BYTE
+BYTE*i
+
+AxUnitToByteArray
+
+AxUnitvalue"	
+UDINT"0.
+
+AxUnitARRAY [0..3] OF BYTE
+BYTE*g
+
+AxUnitToByteArray
+
+AxUnitvalue"
+INT"0.
+
+AxUnitARRAY [0..1] OF BYTE
+BYTE*h
+
+AxUnitToByteArray
+
+AxUnitvalue"
+UINT"0.
+
+AxUnitARRAY [0..1] OF BYTE
+BYTE*h
+
+AxUnitToByteArray
+
+AxUnitvalue"
+DINT"0.
+
+AxUnitARRAY [0..3] OF BYTE
+BYTE*h
+
+AxUnitToByteArray
+
+AxUnitvalue"
+LINT"0.
+
+AxUnitARRAY [0..7] OF BYTE
+BYTE*h
+
+AxUnitToByteArray
+
+AxUnitvalue"
+REAL"0.
+
+AxUnitARRAY [0..3] OF BYTE
+BYTE*i
+
+AxUnitToByteArray
+
+AxUnitvalue"	
+LWORD"0.
+
+AxUnitARRAY [0..7] OF BYTE
+BYTE*i
+
+AxUnitToByteArray
+
+AxUnitvalue"	
+ULINT"0.
+
+AxUnitARRAY [0..7] OF BYTE
+BYTE*i
+
+AxUnitToByteArray
+
+AxUnitvalue"	
+LREAL"0.
+
+AxUnitARRAY [0..7] OF BYTE
+BYTE*ˆ
+!
+AxUnitToByteArray64"
+inline
+
+AxUnitvalue"	
+LWORDC
+
+AxUnitarr"0.
+
+AxUnitARRAY [0..7] OF BYTE
+BYTE*ˆ
+!
+AxUnitToByteArray32"
+inline
+
+AxUnitvalue"	
+DWORDC
+
+AxUnitarr"0.
+
+AxUnitARRAY [0..3] OF BYTE
+BYTE*‡
+!
+AxUnitToByteArray16"
+inline
+
+AxUnitvalue"
+WORDC
+
+AxUnitarr"0.
+
+AxUnitARRAY [0..1] OF BYTE
+BYTE*„
+ 
+AxUnitToByteArray8"
+inline
+
+AxUnitvalue"
+BYTEA
+
+AxUnitarr".,
+
+AxUnitARRAY [0..0] OF BYTE 
+BYTE*ˆ
+
+AxUnit.MockingMock7
+'
+AxUnit.MockingmockeeFn"
+	mandatory"
+
+STRING5
+%
+AxUnit.MockingmockFn"
+	mandatory"
+
+STRING*Å
+
+AxUnit.MockingMock7
+'
+AxUnit.MockingmockeeFn"
+	mandatory"
+
+STRING5
+%
+AxUnit.MockingmockFn"
+	mandatory"
+
+STRING;
+
+AxUnit.Mockingpayload"
+
+AxUnit.MockingIPayload*<
+
+AxUnit.Mocking
+GetPayload"
+
+AxUnit.MockingIPayload2
+
+$GLOBALTestProgram:¢
+
+$GLOBALTestPlc*-
+
+$GLOBALP1Main
+$GLOBALTestProgram2]
+
+$GLOBALMainDefaultIntervalTask3"1
+
+	tInterval
+
+1000000000
+
+	iPriority
+1

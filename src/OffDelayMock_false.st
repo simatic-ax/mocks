@@ -1,4 +1,4 @@
-NAMESPACE Siemens.Ax.Mocks
+NAMESPACE Simatic.Ax.Mocks
     FUNCTION_BLOCK OffDelayMock_false
         VAR
             iecTimer : ARRAY[0..27] of BYTE;

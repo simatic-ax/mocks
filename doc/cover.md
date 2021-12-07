@@ -1,4 +1,4 @@
-# Siemens.AX.Mocks
+# Simatic.Ax.Mocks
 
 Version: 0.0.0-placeholder
 
@@ -7,4 +7,4 @@ Version: 0.0.0-placeholder
 
 The library consists of the following namespaces:
 
-- `Siemens.AX.Mocks`
+- `Simatic.Ax.Mocks`
