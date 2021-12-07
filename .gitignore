@@ -5,4 +5,4 @@
 [Tt]est[Rr]esult*/
 *.tgz
 *.tracerec.json
-obj
+obj/
