@@ -1,8 +1,0 @@
-<test-cases-meta>
-  <test-cases name="axunit_TestsExecuted">
-    <test-case id="0" name="dummy.MyTest" result-variable="axunit_Test_0_Result" parameter="">
-      <source-location file="D:\Git\AxCommunity\simatic.ax.mocks\test\dummytest.st" line="3" />
-    </test-case>
-  </test-cases>
-  <assert-locations variable-name="axunit_assertionData" array-size="150" />
-</test-cases-meta>
