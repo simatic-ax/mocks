@@ -2,6 +2,17 @@
 
 This package provide some predefined mocks for the AXUnit testing framework which you can use for your own tests.
 
+## Install this package
+
+```cli
+apax add @simatic-ax/mocks
+```
+
+## Namespace
+```
+Simatic.Ax.Mocks;
+```
+
 ## Mocks in this package
 
 |Name|Signal|
@@ -10,6 +21,7 @@ This package provide some predefined mocks for the AXUnit testing framework whic
 |OffDelayMock_true  | output = TRUE  |
 |OnDelayMock_false  | output = FALSE |
 |OnDelayMock_true   | output = TRUE  |
+|OnDelayMockWithTwoTimers   | output = TRUE  |
 
 
 ## Contribution
