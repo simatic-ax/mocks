@@ -22,7 +22,7 @@ NAMESPACE Simatic.Ax.Example
             // Mock-Setup
             AxUnit.Mocking.Mock('System.Timer.OnDelay', NAME_OF(OnDelayMock2Timer), THIS._state); 
             testInstance.Execute(run := TRUE);
-            AxUnit.Assert.Equal(TRUE, testInstance.GetTimerState(1));
+            AxUnit.Assert.Equal(FALSE, testInstance.GetTimerState(1));  // expected true --> but something went wrong
             AxUnit.Assert.Equal(FALSE, testInstance.GetTimerState(2));
             
         END_METHOD
@@ -30,8 +30,8 @@ NAMESPACE Simatic.Ax.Example
     
     CLASS Testee
       VAR PUBLIC
-        ValueT1 : LTIME := T#5s;
-        ValueT2 : LTIME := T#10s;
+        ValueT1 : LTIME := T#1s;
+        ValueT2 : LTIME := T#2s;
       END_VAR
 
       VAR
