@@ -4,7 +4,7 @@ NAMESPACE Simatic.Ax.Example
     {TestFixture}
     CLASS TestActiveWait
         VAR
-            _state : OnDelayMockState;
+            _payloadinstance : OnDelayMockState;
             testInstance : Testee;
         END_VAR
 
@@ -16,13 +16,13 @@ NAMESPACE Simatic.Ax.Example
             testInstance.ValueT2 := T#2s;
 
             // Mock timer values after 5 seconds: Timer1 returns true, Timer2 returns false
-            _state.StatusTimer1 := TRUE;
-            _state.StatusTimer2 := FALSE;
+            _payloadinstance.StatusTimer1 := TRUE;
+            _payloadinstance.StatusTimer2 := FALSE;
 
             // Mock-Setup
-            AxUnit.Mocking.Mock('System.Timer.OnDelay', NAME_OF(OnDelayMock2Timer), THIS._state); 
+            AxUnit.Mocking.Mock(NAME_OF(OnDelay), NAME_OF(OnDelayMock2Timer), THIS._payloadinstance); 
             testInstance.Execute(run := TRUE);
-            AxUnit.Assert.Equal(FALSE, testInstance.GetTimerState(1));  // expected true --> but something went wrong
+            AxUnit.Assert.Equal(TRUE, testInstance.GetTimerState(1));  // expected true --> but something went wrong
             AxUnit.Assert.Equal(FALSE, testInstance.GetTimerState(2));
             
         END_METHOD
