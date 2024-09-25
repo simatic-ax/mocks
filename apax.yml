@@ -22,7 +22,7 @@ scripts:
     - apax publishlib
 
 devDependencies:
-  '@ax/sdk': 1.0.175
+  "@ax/sdk": ^2405.0.0
   "@simatic-ax/snippetscollection": 0.0.13
 registries:
   '@simatic-ax': 'https://npm.pkg.github.com/'
@@ -33,4 +33,4 @@ files:
   - 'src' # ship library with source
   # - 'library/1500/'   # ship library with binary
 dependencies:
-  "@ax/system-timer": 6.0.94
+  "@ax/system-timer": ^7.0.17
