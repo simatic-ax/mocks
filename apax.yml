@@ -34,4 +34,4 @@ files:
   # - 'library/1500/'   # ship library with binary
 dependencies:
   "@ax/system-timer": ^7.0.17
-  "@ax/axunit-mocking": ^5.2.6
+  "@ax/axunit-mocking": ^6.0.0
