@@ -22,7 +22,7 @@ scripts:
     - apax publishlib
 
 devDependencies:
-  "@ax/sdk": ^2405.0.0
+  "@ax/sdk": ^2411.0.0
   "@simatic-ax/snippetscollection": 0.0.13
 registries:
   '@simatic-ax': 'https://npm.pkg.github.com/'
