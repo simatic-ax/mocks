@@ -18,7 +18,8 @@ NAMESPACE Simatic.Ax.Mocks
         END_VAR
 
         state ?= AxUnit.Mocking.GetPayload();
-        
+        output := TRUE;
+        return;
         IF (signal = FALSE) THEN
             output := FALSE;
         ELSE
