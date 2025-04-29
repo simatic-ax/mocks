@@ -31,7 +31,6 @@ files:
   - 'LICENSE.md'
   - 'docs'
   - 'src' # ship library with source
-  # - 'library/1500/'   # ship library with binary
 dependencies:
   "@ax/system-timer": ^8.0.8
   "@ax/axunit-mocking": ^6.1.12
