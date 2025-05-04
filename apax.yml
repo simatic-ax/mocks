@@ -32,6 +32,6 @@ files:
   - 'docs'
   - 'src' # ship library with source
 dependencies:
-  "@ax/system-timer": ^8.0.8
-  "@ax/axunit-mocking": ^6.1.12
+  "@ax/system-timer": ^10.0.0
+  "@ax/axunit-mocking": ^8.0.0
 installStrategy: strict
