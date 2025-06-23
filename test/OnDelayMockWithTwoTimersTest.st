@@ -1,6 +1,7 @@
 USING System.Timer;
 USING Simatic.Ax.Mocks;
 NAMESPACE Simatic.Ax.Example
+    /// Test fixture for testing OnDelayMock with two timers and verifying their states.
     {TestFixture}
     CLASS TestActiveWait
         VAR
@@ -8,6 +9,9 @@ NAMESPACE Simatic.Ax.Example
             testInstance : Testee;
         END_VAR
 
+        /// Tests the state of two timers after one clock cycle with mocked values.
+        /// Input: None.
+        /// Returns: None. Asserts expected timer states.
         {Test}
         METHOD PUBLIC Test_One_Clock_Cycle_Expect_True_False_True
             // give the timer instances a uniq ID. For this purpose, the duration will be used. 
@@ -28,9 +32,12 @@ NAMESPACE Simatic.Ax.Example
         END_METHOD
     END_CLASS
     
+    /// Class under test that manages two OnDelay timers and exposes their states.
     CLASS Testee
       VAR PUBLIC
+        /// Duration for timer 1.
         ValueT1 : LTIME := T#1s;
+        /// Duration for timer 2.
         ValueT2 : LTIME := T#2s;
       END_VAR
 
@@ -39,6 +46,9 @@ NAMESPACE Simatic.Ax.Example
         t2 : OnDelay;
       END_VAR
 
+      /// Executes both timers with the provided run signal and configured durations.
+      /// Input: run - BOOL signal to start both timers.
+      /// Returns: None.
       METHOD PUBLIC Execute
         VAR_INPUT
           run : BOOL;
@@ -47,6 +57,9 @@ NAMESPACE Simatic.Ax.Example
         t2(signal := run, duration := ValueT2);
       END_METHOD
 
+      /// Gets the output state of the specified timer.
+      /// Input: id - INT, 1 for t1, 2 for t2.
+      /// Returns: BOOL state of the selected timer.
       METHOD PUBLIC GetTimerState : BOOL
         VAR_INPUT
           id : INT;
