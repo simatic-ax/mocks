@@ -16,24 +16,13 @@ registries:
 devDependencies:
   "@ax/sdk": ^2504.0.0
   "@simatic-ax/snippetscollection": ^1.0.0
-  "@ax/axunit-mocking": ^8.0.33
 
 dependencies:
   "@ax/system-timer": ^10.0.24
-
-scripts:
-  publishlib:
-    - apax publish --package *.apax.tgz --registry $GITHUB_REG_URL
-    - rm *.apax.tgz -f
-  createpackage:
-    # - apax build
-    # - apax test
-    - apax version $1
-    - apax pack
-    - apax publishlib
+  "@ax/axunit-mocking": ^8.0.33
 
 files:
   - 'README.md'
   - 'LICENSE.md'
   - 'docs'
-  - 'bin'
+  - 'src'
