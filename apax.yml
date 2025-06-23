@@ -6,6 +6,7 @@ variables:
   APAX_BUILD_ARGS:
     - '--log Debug'
     - --debug
+
   GITHUB_REG_URL: "https://npm.pkg.github.com"
 targets:
   - '1500'
@@ -19,7 +20,8 @@ devDependencies:
   "@ax/axunit-mocking": ^8.0.33
 
 dependencies:
-  "@ax/system-timer": 10.0.24
+  "@ax/system-timer": ^10.0.24
+  "@ax/mocking-library": ^8.0.33
 
 files:
   - 'README.md'
