@@ -18,10 +18,8 @@ devDependencies:
   "@ax/sdk": ^2504.0.0
   "@simatic-ax/snippetscollection": ^1.0.0
   "@ax/axunit-mocking": ^8.0.33
-
 dependencies:
   "@ax/system-timer": ^10.0.24
-  "@ax/mocking-library": ^8.0.33
 
 files:
   - 'README.md'
