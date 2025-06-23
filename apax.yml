@@ -25,4 +25,4 @@ files:
   - 'README.md'
   - 'LICENSE.md'
   - 'docs'
-  - 'src'
+  - 'bin'
