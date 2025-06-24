@@ -23,6 +23,57 @@ Simatic.Ax.Mocks;
 |OnDelayMock_true   | output = TRUE  |
 |OnDelayMockWithTwoTimers   | output = TRUE  |
 
+## Example: How to mock a Timer like OnDelay
+
+You can use the provided mocks to simulate timer behavior in your unit tests.  
+Below is an example of how to mock the `OnDelay` timer using `AxUnit.Mocking.Mock` and verify the behavior of your function block or class under test.
+
+```iecst
+USING System.Timer;
+USING AxUnit.Assert;
+
+NAMESPACE Simatic.Ax.Mocks
+    /// Function block that uses an OnDelay timer to set a status string.
+    FUNCTION_BLOCK FunctionBlockWhichUsesTimer
+        VAR_INPUT
+            enable : BOOL;
+        END_VAR
+        VAR_OUTPUT
+            timerStatus : STRING;
+        END_VAR
+        VAR
+            ton : OnDelay;
+        END_VAR
+
+        ton(signal := enable, duration := T#10s);
+
+        IF (ton.output) THEN
+            timerStatus := 'ELAPSED';
+        ELSIF (ton.signal AND NOT ton.output) THEN
+            timerStatus := 'RUNNING';
+        ELSIF (NOT ton.signal) THEN
+            timerStatus := 'IDLE';
+        END_IF;
+        ;
+    END_FUNCTION_BLOCK
+
+    {TestFixture}
+    CLASS TestFunctionBlockWhichUsesTimer
+        VAR
+            testInstance : FunctionBlockWhichUsesTimer;
+        END_VAR
+
+        /// Tests that timerStatus is 'ELAPSED' when enabled and time has elapsed (using mock).
+        {Test}
+        METHOD PUBLIC FunctionBlockReturnsElapsedWhenEnabledAndTimeHasElapsed
+            // Mock the OnDelay timer to always return output = TRUE
+            AxUnit.Mocking.Mock(NAME_OF(OnDelay), NAME_OF(OnDelayMock_true));
+            testInstance(enable := TRUE);
+            Equal(expected := 'ELAPSED', actual := testInstance.timerStatus);
+        END_METHOD
+    END_CLASS
+END_NAMESPACE
+```
 
 ## Markdownlint-cli
 
