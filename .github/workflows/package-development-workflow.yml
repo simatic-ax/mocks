@@ -78,7 +78,6 @@ jobs:
         with:
           name: build-artifacts
           path: |
-            bin/1500 
             bin/llvm
           retention-days: 90
           if-no-files-found: error
