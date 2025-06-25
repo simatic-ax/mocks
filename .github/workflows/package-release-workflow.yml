@@ -42,11 +42,11 @@ jobs:
       - name: Create bin folder
         run: mkdir -p bin
 
-      - name: Download build artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: build-artifacts
-          path: bin
+      # - name: Download build artifacts
+      #   uses: actions/download-artifact@v4
+      #   with:
+      #     name: build-artifacts
+      #     path: bin
 
       - name: Version package
         uses: simatic-ax/actions/apax-version@v3
