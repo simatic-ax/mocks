@@ -80,4 +80,3 @@ jobs:
           path: |
             bin/llvm
           retention-days: 90
-          if-no-files-found: error
