@@ -17,7 +17,7 @@ registries:
   '@simatic-ax': 'https://npm.pkg.github.com/'
 
 devDependencies:
-  "@ax/sdk": ^2504.0.0
+  "@ax/sdk": ^2510.0.0
   "@simatic-ax/snippetscollection": ^1.0.0
   "@ax/axunit-mocking": ^8.0.33
 dependencies:
@@ -29,4 +29,4 @@ files:
   - 'docs'
   - 'src'
 catalogs:
-  "@ax/simatic-ax": ^2504.0.0
+  "@ax/simatic-ax": ^2510.0.0
