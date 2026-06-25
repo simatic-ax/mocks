@@ -2,7 +2,19 @@
 
 ## Overview
 
-The `IdentifierBasedTimerMock` provides a flexible solution for testing function blocks with **conditional timer usage**. Unlike duration-based matching, this mock identifies timers by their **call position** within the execution cycle, making it independent of timer duration values.
+The `IdentifierBasedTimerMock` family provides flexible solutions for testing function blocks with **conditional timer usage**. Unlike duration-based matching, these mocks identify timers by their **call position** within the execution cycle, making them independent of timer duration values.
+
+## Available Mocks
+
+### System.Timer Interface (signal/duration)
+
+- **`IdentifierBasedTimerMock`** - For `OnDelay` timers
+- **`IdentifierBasedOffDelayMock`** - For `OffDelay` timers
+
+### IEC 61131-3 Interface (IN/PT)
+
+- **`IdentifierBasedTONMock`** - For `TON` (On-Delay) timers
+- **`IdentifierBasedTOFMock`** - For `TOF` (Off-Delay) timers
 
 ## Key Concept
 
@@ -34,7 +46,7 @@ In this example:
 
 ```iec-st
 VAR
-    payload : IdentifierBasedTimerMockPayload;
+    payload : IdentifierBasedTimerMockPayload;  // Or IdentifierBasedOffDelayMockPayload, etc.
 END_VAR
 
 // Reset counter before each test
@@ -52,11 +64,32 @@ payload.T2_CallPosition := 2;  // 2nd call
 payload.T2_Output := FALSE;
 payload.T2_ElapsedTime := T#500ms;
 
-// Apply mock
+// Apply mock for OnDelay
 AxUnit.Mocking.Mock(
-    mockeeFn := NAME_OF(OnDelay), 
+    mockeeFn := NAME_OF(OnDelay),
     mockFn := NAME_OF(IdentifierBasedTimerMock),
     payload := payload
+);
+
+// Or for OffDelay
+AxUnit.Mocking.Mock(
+    mockeeFn := NAME_OF(OffDelay),
+    mockFn := NAME_OF(IdentifierBasedOffDelayMock),
+    payload := IdentifierBasedOffDelayMockPayload
+);
+
+// Or for TON (IEC)
+AxUnit.Mocking.Mock(
+    mockeeFn := NAME_OF(TON_Mock_true),
+    mockFn := NAME_OF(IdentifierBasedTONMock),
+    payload := IdentifierBasedTONMockPayload
+);
+
+// Or for TOF (IEC)
+AxUnit.Mocking.Mock(
+    mockeeFn := NAME_OF(TOF_Mock_true),
+    mockFn := NAME_OF(IdentifierBasedTOFMock),
+    payload := IdentifierBasedTOFMockPayload
 );
 ```
 
@@ -106,11 +139,19 @@ testInstance(mode := 2, enable := TRUE);
 
 ## Payload Configuration
 
+Each mock has its own payload class:
+- `IdentifierBasedTimerMockPayload` - For OnDelay
+- `IdentifierBasedOffDelayMockPayload` - For OffDelay
+- `IdentifierBasedTONMockPayload` - For TON
+- `IdentifierBasedTOFMockPayload` - For TOF
+
+All payload classes provide the following properties:
+
 | Property | Type | Description |
 |----------|------|-------------|
 | `CallCounter` | INT | Internal counter tracking current call number |
-| `LastCallDuration` | LTIME | Debug: Last called duration |
-| `LastCallSignal` | BOOL | Debug: Last called signal |
+| `LastCallDuration` or `LastCallPT` | LTIME | Debug: Last called duration/preset time |
+| `LastCallSignal` or `LastCallIN` | BOOL | Debug: Last called signal/input |
 | `TX_Enabled` | BOOL | Enable this timer configuration |
 | `TX_CallPosition` | INT | Expected call position (1-4) |
 | `TX_Output` | BOOL | Desired output state |
@@ -243,7 +284,13 @@ payload.T4_Output := TRUE;
 
 ## See Also
 
-- [`IdentifierBasedTimerMockTest.st`](../test/IdentifierBasedTimerMockTest.st) - Complete test examples
-- [`ConfigurableTimerMock.st`](../src/System/Timer/ConfigurableTimerMock.st) - Sequential timer mock
-- [`SimpleMocks_RealWorld_Test.st`](../test/SimpleMocks_RealWorld_Test.st) - Examples for simple mocks
-- [`TimerMocks-Overview.md`](TimerMocks-Overview.md) - Complete overview and decision guide
+- **Test Examples:**
+  - [`IdentifierBasedTimerMockTest.st`](../test/IdentifierBasedTimerMockTest.st) - OnDelay examples
+  - [`IdentifierBasedOffDelayMockTest.st`](../test/IdentifierBasedOffDelayMockTest.st) - OffDelay examples
+  - [`IdentifierBasedTONMockTest.st`](../test/IdentifierBasedTONMockTest.st) - TON examples
+  - [`IdentifierBasedTOFMockTest.st`](../test/IdentifierBasedTOFMockTest.st) - TOF examples
+- **Other Mocks:**
+  - [`ConfigurableTimerMock`](ConfigurableTimerMock.md) - Sequential timer mocks
+  - [`SimpleMocks_RealWorld_Test.st`](../test/SimpleMocks_RealWorld_Test.st) - Simple mock examples
+- **Overview:**
+  - [`TimerMocks-Overview.md`](TimerMocks-Overview.md) - Complete overview and decision guide

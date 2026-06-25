@@ -110,7 +110,7 @@ END_METHOD
 
 ### Advanced Configurable Mocks
 
-#### ConfigurableTimerMock
+#### ConfigurableTimerMock Family
 
 **Best for:** Sequential timers with consistent call order and **different states**
 
@@ -118,8 +118,15 @@ END_METHOD
 - Call-order based identification (1st call = T1, 2nd call = T2, etc.)
 - Works with timers having identical durations
 - Simple configuration
+- **Available for:** OnDelay, OffDelay, TON, TOF
 
 📖 [Full Documentation](docs/ConfigurableTimerMock.md)
+
+**Available Mocks:**
+- `ConfigurableTimerMock` + `ConfigurableTimerMockPayload` - For OnDelay
+- `ConfigurableOffDelayMock` + `ConfigurableOffDelayMockPayload` - For OffDelay
+- `ConfigurableTONMock` + `ConfigurableTONMockPayload` - For TON
+- `ConfigurableTOFMock` + `ConfigurableTOFMockPayload` - For TOF
 
 ```iecst
 payload.ResetCounter();
@@ -146,7 +153,7 @@ AxUnit.Mocking.Mock(
 );
 ```
 
-#### IdentifierBasedTimerMock
+#### IdentifierBasedTimerMock Family
 
 **Best for:** Conditional timer logic (e.g., IF mode=1 THEN timer2 ELSE timer3)
 
@@ -154,8 +161,15 @@ AxUnit.Mocking.Mock(
 - Position-based identification with explicit call positions
 - Perfect for conditional timer usage
 - Duration-independent
+- **Available for:** OnDelay, OffDelay, TON, TOF
 
 📖 [Full Documentation](docs/IdentifierBasedTimerMock.md)
+
+**Available Mocks:**
+- `IdentifierBasedTimerMock` + `IdentifierBasedTimerMockPayload` - For OnDelay
+- `IdentifierBasedOffDelayMock` + `IdentifierBasedOffDelayMockPayload` - For OffDelay
+- `IdentifierBasedTONMock` + `IdentifierBasedTONMockPayload` - For TON
+- `IdentifierBasedTOFMock` + `IdentifierBasedTOFMockPayload` - For TOF
 
 ```iecst
 payload.ResetCounter();
@@ -357,24 +371,28 @@ END_METHOD
 
 All mocks include comprehensive test coverage. See the `test/` directory for examples:
 
+**Simple Mocks:**
 - [SimpleMocks_RealWorld_Test.st](test/SimpleMocks_RealWorld_Test.st) - **Real-world examples showing when to use simple mocks**
 - [IEC_TON_Mocks_Test.st](test/IEC_TON_Mocks_Test.st) - IEC TON timer tests
 - [IEC_TOF_Mocks_Test.st](test/IEC_TOF_Mocks_Test.st) - IEC TOF timer tests
 - [System_OnDelay_Mocks_Test.st](test/System_OnDelay_Mocks_Test.st) - System OnDelay tests
 - [System_OffDelay_Mocks_Test.st](test/System_OffDelay_Mocks_Test.st) - System OffDelay tests
-- [ConfigurableTimerMockTest.st](test/ConfigurableTimerMockTest.st) - Configurable mock tests
-- [IdentifierBasedTimerMockTest.st](test/IdentifierBasedTimerMockTest.st) - Identifier-based mock tests
-- [FooFB_ConfigurableMock_Test.st](test/FooFB_ConfigurableMock_Test.st) - Real-world example
-- [FooFB_IdentifierMock_Test.st](test/FooFB_IdentifierMock_Test.st) - Real-world example
 
-## Markdownlint-cli
+**Configurable Mocks:**
+- [ConfigurableTimerMockTest.st](test/ConfigurableTimerMockTest.st) - OnDelay configurable mock
+- [ConfigurableOffDelayMockTest.st](test/ConfigurableOffDelayMockTest.st) - OffDelay configurable mock
+- [ConfigurableTONMockTest.st](test/ConfigurableTONMockTest.st) - TON configurable mock
+- [ConfigurableTOFMockTest.st](test/ConfigurableTOFMockTest.st) - TOF configurable mock
 
-This workspace will be checked by the [markdownlint-cli](https://github.com/igorshubovych/markdownlint-cli) tool in the CI workflow automatically.  
-To avoid CI workflow failures, check all markdown files locally:
+**Identifier-Based Mocks:**
+- [IdentifierBasedTimerMockTest.st](test/IdentifierBasedTimerMockTest.st) - OnDelay identifier-based mock
+- [IdentifierBasedOffDelayMockTest.st](test/IdentifierBasedOffDelayMockTest.st) - OffDelay identifier-based mock
+- [IdentifierBasedTONMockTest.st](test/IdentifierBasedTONMockTest.st) - TON identifier-based mock
+- [IdentifierBasedTOFMockTest.st](test/IdentifierBasedTOFMockTest.st) - TOF identifier-based mock
 
-```sh
-markdownlint **/*.md --fix
-```
+**Real-World Examples:**
+- [FooFB_ConfigurableMock_Test.st](test/FooFB_ConfigurableMock_Test.st) - Real-world configurable example
+- [FooFB_IdentifierMock_Test.st](test/FooFB_IdentifierMock_Test.st) - Real-world identifier-based example
 
 ## Contribution
 
