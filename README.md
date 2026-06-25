@@ -25,7 +25,7 @@ Simatic.Ax.Mocks;
 - You have a **single timer** in your function block, OR
 - **All timers** should have the **same state** (all elapsed or all waiting)
 
-For testing multiple timers with **different states**, use [`ConfigurableTimerMock`](#configurabletimermock) or [`IdentifierBasedTimerMock`](#identifierbasedtimermock).
+For testing multiple timers with **different states**, use [`ConfigurableOnDelayMock`](#ConfigurableOnDelayMock) or [`IdentifierBasedOnDelayMock`](#IdentifierBasedOnDelayMock).
 
 #### System.Timer Mocks (signal/duration interface)
 
@@ -102,7 +102,7 @@ METHOD PUBLIC Test_MixedStates
     // All timers will be TRUE or all FALSE
     AxUnit.Mocking.Mock(NAME_OF(OnDelay), NAME_OF(OnDelayMock_true));
     
-    // ✅ SOLUTION: Use ConfigurableTimerMock or IdentifierBasedTimerMock instead!
+    // ✅ SOLUTION: Use ConfigurableOnDelayMock or IdentifierBasedOnDelayMock instead!
 END_METHOD
 ```
 
@@ -110,7 +110,7 @@ END_METHOD
 
 ### Advanced Configurable Mocks
 
-#### ConfigurableTimerMock Family
+#### ConfigurableOnDelayMock Family
 
 **Best for:** Sequential timers with consistent call order and **different states**
 
@@ -120,10 +120,10 @@ END_METHOD
 - Simple configuration
 - **Available for:** OnDelay, OffDelay, TON, TOF
 
-📖 [Full Documentation](docs/ConfigurableTimerMock.md)
+📖 [Full Documentation](docs/ConfigurableOnDelayMock.md)
 
 **Available Mocks:**
-- `ConfigurableTimerMock` + `ConfigurableTimerMockPayload` - For OnDelay
+- `ConfigurableOnDelayMock` + `ConfigurableOnDelayMockPayload` - For OnDelay
 - `ConfigurableOffDelayMock` + `ConfigurableOffDelayMockPayload` - For OffDelay
 - `ConfigurableTONMock` + `ConfigurableTONMockPayload` - For TON
 - `ConfigurableTOFMock` + `ConfigurableTOFMockPayload` - For TOF
@@ -148,12 +148,12 @@ payload.T3_ElapsedTime := T#5s;
 
 AxUnit.Mocking.Mock(
     mockeeFn := NAME_OF(OnDelay), 
-    mockFn := NAME_OF(ConfigurableTimerMock),
+    mockFn := NAME_OF(ConfigurableOnDelayMock),
     payload := payload
 );
 ```
 
-#### IdentifierBasedTimerMock Family
+#### IdentifierBasedOnDelayMock Family
 
 **Best for:** Conditional timer logic (e.g., IF mode=1 THEN timer2 ELSE timer3)
 
@@ -163,10 +163,10 @@ AxUnit.Mocking.Mock(
 - Duration-independent
 - **Available for:** OnDelay, OffDelay, TON, TOF
 
-📖 [Full Documentation](docs/IdentifierBasedTimerMock.md)
+📖 [Full Documentation](docs/IdentifierBasedOnDelayMock.md)
 
 **Available Mocks:**
-- `IdentifierBasedTimerMock` + `IdentifierBasedTimerMockPayload` - For OnDelay
+- `IdentifierBasedOnDelayMock` + `IdentifierBasedOnDelayMockPayload` - For OnDelay
 - `IdentifierBasedOffDelayMock` + `IdentifierBasedOffDelayMockPayload` - For OffDelay
 - `IdentifierBasedTONMock` + `IdentifierBasedTONMockPayload` - For TON
 - `IdentifierBasedTOFMock` + `IdentifierBasedTOFMockPayload` - For TOF
@@ -191,7 +191,7 @@ payload.T3_Output := TRUE;
 
 AxUnit.Mocking.Mock(
     mockeeFn := NAME_OF(OnDelay), 
-    mockFn := NAME_OF(IdentifierBasedTimerMock),
+    mockFn := NAME_OF(IdentifierBasedOnDelayMock),
     payload := payload
 );
 ```
@@ -250,7 +250,7 @@ END_NAMESPACE
 {Test}
 METHOD PUBLIC TestMultipleTimersWithDifferentStates
     VAR
-        payload : ConfigurableTimerMockPayload;
+        payload : ConfigurableOnDelayMockPayload;
     END_VAR
     
     payload.ResetCounter();
@@ -272,7 +272,7 @@ METHOD PUBLIC TestMultipleTimersWithDifferentStates
     
     AxUnit.Mocking.Mock(
         mockeeFn := NAME_OF(OnDelay), 
-        mockFn := NAME_OF(ConfigurableTimerMock),
+        mockFn := NAME_OF(ConfigurableOnDelayMock),
         payload := payload
     );
     
@@ -291,7 +291,7 @@ END_METHOD
 {Test}
 METHOD PUBLIC TestConditionalTimers
     VAR
-        payload : IdentifierBasedTimerMockPayload;
+        payload : IdentifierBasedOnDelayMockPayload;
     END_VAR
     
     payload.ResetCounter();
@@ -308,7 +308,7 @@ METHOD PUBLIC TestConditionalTimers
     
     AxUnit.Mocking.Mock(
         mockeeFn := NAME_OF(OnDelay), 
-        mockFn := NAME_OF(IdentifierBasedTimerMock),
+        mockFn := NAME_OF(IdentifierBasedOnDelayMock),
         payload := payload
     );
     
@@ -323,8 +323,8 @@ END_METHOD
 |----------|------------------|
 | **Single timer** | `OnDelayMock_true` / `OnDelayMock_false` ✅ |
 | **Multiple timers, all same state** | `OnDelayMock_true` / `OnDelayMock_false` ✅ |
-| **Multiple timers, different states** | [`ConfigurableTimerMock`](docs/ConfigurableTimerMock.md) ✅ |
-| **Conditional timer logic (IF/CASE)** | [`IdentifierBasedTimerMock`](docs/IdentifierBasedTimerMock.md) ✅ |
+| **Multiple timers, different states** | [`ConfigurableOnDelayMock`](docs/ConfigurableOnDelayMock.md) ✅ |
+| **Conditional timer logic (IF/CASE)** | [`IdentifierBasedOnDelayMock`](docs/IdentifierBasedOnDelayMock.md) ✅ |
 | **IEC 61131-3 standard timers** | `TON_Mock_true` / `TOF_Mock_false` ✅ |
 
 ## Testing Best Practices
@@ -338,7 +338,7 @@ Always use the stateless pattern to ensure test isolation:
 CLASS MyTests
     VAR
         myFB, myFBStateless : MyFunctionBlock;
-        payload, payloadStateless : ConfigurableTimerMockPayload;
+        payload, payloadStateless : ConfigurableOnDelayMockPayload;
     END_VAR
 
     {TestSetup}
@@ -363,8 +363,8 @@ END_METHOD
 
 ## Documentation
 
-- [ConfigurableTimerMock](docs/ConfigurableTimerMock.md) - Call-order based mock for multiple timers
-- [IdentifierBasedTimerMock](docs/IdentifierBasedTimerMock.md) - Position-based mock for conditional logic
+- [ConfigurableOnDelayMock](docs/ConfigurableOnDelayMock.md) - Call-order based mock for multiple timers
+- [IdentifierBasedOnDelayMock](docs/IdentifierBasedOnDelayMock.md) - Position-based mock for conditional logic
 - [TimerMocks-Overview](docs/TimerMocks-Overview.md) - Complete overview and decision guide
 
 ## Tests
@@ -373,22 +373,22 @@ All mocks include comprehensive test coverage. See the `test/` directory for exa
 
 **Simple Mocks:**
 - [SimpleMocks_RealWorld_Test.st](test/SimpleMocks_RealWorld_Test.st) - **Real-world examples showing when to use simple mocks**
-- [IEC_TON_Mocks_Test.st](test/IEC_TON_Mocks_Test.st) - IEC TON timer tests
-- [IEC_TOF_Mocks_Test.st](test/IEC_TOF_Mocks_Test.st) - IEC TOF timer tests
-- [System_OnDelay_Mocks_Test.st](test/System_OnDelay_Mocks_Test.st) - System OnDelay tests
-- [System_OffDelay_Mocks_Test.st](test/System_OffDelay_Mocks_Test.st) - System OffDelay tests
+- [IEC_TON_Mocks_Test.st](test/IEC/Timer/IEC_TON_Mocks_Test.st) - IEC TON timer tests
+- [IEC_TOF_Mocks_Test.st](test/IEC/Timer/IEC_TOF_Mocks_Test.st) - IEC TOF timer tests
+- [System_OnDelay_Mocks_Test.st](test/System/Timer/System_OnDelay_Mocks_Test.st) - System OnDelay tests
+- [System_OffDelay_Mocks_Test.st](test/System/Timer/System_OffDelay_Mocks_Test.st) - System OffDelay tests
 
 **Configurable Mocks:**
-- [ConfigurableTimerMockTest.st](test/ConfigurableTimerMockTest.st) - OnDelay configurable mock
-- [ConfigurableOffDelayMockTest.st](test/ConfigurableOffDelayMockTest.st) - OffDelay configurable mock
-- [ConfigurableTONMockTest.st](test/ConfigurableTONMockTest.st) - TON configurable mock
-- [ConfigurableTOFMockTest.st](test/ConfigurableTOFMockTest.st) - TOF configurable mock
+- [ConfigurableOnDelayMockTest.st](test/System/Timer/ConfigurableOnDelayMockTest.st) - OnDelay configurable mock
+- [ConfigurableOffDelayMockTest.st](test/System/Timer/ConfigurableOffDelayMockTest.st) - OffDelay configurable mock
+- [ConfigurableTONMockTest.st](test/IEC/Timer/ConfigurableTONMockTest.st) - TON configurable mock
+- [ConfigurableTOFMockTest.st](test/IEC/Timer/ConfigurableTOFMockTest.st) - TOF configurable mock
 
 **Identifier-Based Mocks:**
-- [IdentifierBasedTimerMockTest.st](test/IdentifierBasedTimerMockTest.st) - OnDelay identifier-based mock
-- [IdentifierBasedOffDelayMockTest.st](test/IdentifierBasedOffDelayMockTest.st) - OffDelay identifier-based mock
-- [IdentifierBasedTONMockTest.st](test/IdentifierBasedTONMockTest.st) - TON identifier-based mock
-- [IdentifierBasedTOFMockTest.st](test/IdentifierBasedTOFMockTest.st) - TOF identifier-based mock
+- [IdentifierBasedOnDelayMockTest.st](test/System/Timer/IdentifierBasedOnDelayMockTest.st) - OnDelay identifier-based mock
+- [IdentifierBasedOffDelayMockTest.st](test/System/Timer/IdentifierBasedOffDelayMockTest.st) - OffDelay identifier-based mock
+- [IdentifierBasedTONMockTest.st](test/IEC/Timer/IdentifierBasedTONMockTest.st) - TON identifier-based mock
+- [IdentifierBasedTOFMockTest.st](test/IEC/Timer/IdentifierBasedTOFMockTest.st) - TOF identifier-based mock
 
 **Real-World Examples:**
 - [FooFB_ConfigurableMock_Test.st](test/FooFB_ConfigurableMock_Test.st) - Real-world configurable example

@@ -13,9 +13,9 @@
 
 #### Advanced Configurable Timer Mocks
 
-**ConfigurableTimerMock Family** - Call-order based mocks supporting up to 4 timer instances
+**ConfigurableOnDelayMock Family** - Call-order based mocks supporting up to 4 timer instances
 
-- `ConfigurableTimerMock` + `ConfigurableTimerMockPayload` - For System.Timer.OnDelay
+- `ConfigurableOnDelayMock` + `ConfigurableOnDelayMockPayload` - For System.Timer.OnDelay
 - `ConfigurableOffDelayMock` + `ConfigurableOffDelayMockPayload` - For System.Timer.OffDelay
 - `ConfigurableTONMock` + `ConfigurableTONMockPayload` - For IEC TON timers
 - `ConfigurableTOFMock` + `ConfigurableTOFMockPayload` - For IEC TOF timers
@@ -27,9 +27,9 @@ Features:
   - Includes `ResetCounter()` method for test isolation
   - **Each timer can have individual state** (unlike simple mocks)
 
-**IdentifierBasedTimerMock Family** - Position-based mocks for conditional timer logic
+**IdentifierBasedOnDelayMock Family** - Position-based mocks for conditional timer logic
 
-- `IdentifierBasedTimerMock` + `IdentifierBasedTimerMockPayload` - For System.Timer.OnDelay
+- `IdentifierBasedOnDelayMock` + `IdentifierBasedOnDelayMockPayload` - For System.Timer.OnDelay
 - `IdentifierBasedOffDelayMock` + `IdentifierBasedOffDelayMockPayload` - For System.Timer.OffDelay
 - `IdentifierBasedTONMock` + `IdentifierBasedTONMockPayload` - For IEC TON timers
 - `IdentifierBasedTOFMock` + `IdentifierBasedTOFMockPayload` - For IEC TOF timers
@@ -43,8 +43,8 @@ Features:
 
 #### Documentation
 
-- Added comprehensive documentation for `ConfigurableTimerMock`
-- Added comprehensive documentation for `IdentifierBasedTimerMock`
+- Added comprehensive documentation for `ConfigurableOnDelayMock`
+- Added comprehensive documentation for `IdentifierBasedOnDelayMock`
 - Added complete overview documentation (`TimerMocks-Overview.md`)
 - Updated README.md with complete mock overview and usage examples
 - **Added important limitation notes for simple mocks** (only for single timer or all same state)
@@ -55,13 +55,13 @@ Features:
 - Added comprehensive tests for IEC TOF mocks (`IEC_TOF_Mocks_Test.st`)
 - Added comprehensive tests for System OnDelay mocks (`System_OnDelay_Mocks_Test.st`)
 - Added comprehensive tests for System OffDelay mocks (`System_OffDelay_Mocks_Test.st`)
-- Added tests for ConfigurableTimerMock family:
-  - `ConfigurableTimerMockTest.st` - OnDelay tests
+- Added tests for ConfigurableOnDelayMock family:
+  - `ConfigurableOnDelayMockTest.st` - OnDelay tests
   - `ConfigurableOffDelayMockTest.st` - OffDelay tests
   - `ConfigurableTONMockTest.st` - TON tests
   - `ConfigurableTOFMockTest.st` - TOF tests
-- Added tests for IdentifierBasedTimerMock family:
-  - `IdentifierBasedTimerMockTest.st` - OnDelay tests
+- Added tests for IdentifierBasedOnDelayMock family:
+  - `IdentifierBasedOnDelayMockTest.st` - OnDelay tests
   - `IdentifierBasedOffDelayMockTest.st` - OffDelay tests
   - `IdentifierBasedTONMockTest.st` - TON tests
   - `IdentifierBasedTOFMockTest.st` - TOF tests
