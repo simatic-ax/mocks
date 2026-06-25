@@ -2,7 +2,7 @@
 
 ## Description
 
-This package provide some predefined mocks for the AXUnit testing framework which you can use for your own tests.
+This package provides comprehensive predefined mocks for the AXUnit testing framework. It includes simple timer mocks as well as advanced configurable mocks for complex testing scenarios with multiple timers.
 
 ## Install this package
 
@@ -11,31 +11,196 @@ apax add @simatic-ax/mocks
 ```
 
 ## Namespace
-```
+
+```iecst
 Simatic.Ax.Mocks;
 ```
 
-## Mocks in this package
+## Available Mocks
 
-|Name|Signal|
-|-|-|
-|OffDelayMock_false | output = FALSE |
-|OffDelayMock_true  | output = TRUE  |
-|OnDelayMock_false  | output = FALSE |
-|OnDelayMock_true   | output = TRUE  |
-|OnDelayMockWithTwoTimers   | output = TRUE  |
+### Simple Timer Mocks
 
-## Example: How to mock a Timer like OnDelay
+⚠️ **Important Limitation:** Simple mocks set **ALL** timers in your function block to the **same state**. Use them only when:
 
-You can use the provided mocks to simulate timer behavior in your unit tests.  
-Below is an example of how to mock the `OnDelay` timer using `AxUnit.Mocking.Mock` and verify the behavior of your function block or class under test.
+- You have a **single timer** in your function block, OR
+- **All timers** should have the **same state** (all elapsed or all waiting)
+
+For testing multiple timers with **different states**, use [`ConfigurableTimerMock`](#configurabletimermock) or [`IdentifierBasedTimerMock`](#identifierbasedtimermock).
+
+#### System.Timer Mocks (signal/duration interface)
+
+| Name | Output | ElapsedTime | Use Case |
+|------|--------|-------------|----------|
+| [`OnDelayMock_false`](src/System/Timer/OnDelayMock_false.st) | FALSE | 0ms | Timer not elapsed |
+| [`OnDelayMock_true`](src/System/Timer/OnDelayMock_true.st) | TRUE | duration | Timer elapsed |
+| [`OffDelayMock_false`](src/System/Timer/OffDelayMock_false.st) | FALSE | 0ms | Timer not elapsed |
+| [`OffDelayMock_true`](src/System/Timer/OffDelayMock_true.st) | TRUE | duration | Timer elapsed |
+
+#### IEC 61131-3 Standard Mocks (IN/PT interface)
+
+| Name | Q Output | ET | Use Case |
+|------|----------|-----|----------|
+| [`TON_Mock_false`](src/IEC/Timer/TON_Mock_false.st) | FALSE | 0ms | On-Delay not elapsed |
+| [`TON_Mock_true`](src/IEC/Timer/TON_Mock_true.st) | TRUE | PT | On-Delay elapsed |
+| [`TOF_Mock_false`](src/IEC/Timer/TOF_Mock_false.st) | FALSE | 0ms | Off-Delay not elapsed |
+| [`TOF_Mock_true`](src/IEC/Timer/TOF_Mock_true.st) | TRUE | PT | Off-Delay elapsed |
+
+**Example - Single Timer (✅ Correct Usage):**
+
+```iecst
+FUNCTION_BLOCK SingleTimerController
+    VAR
+        startupTimer : OnDelay;
+    END_VAR
+    startupTimer(signal := enable, duration := T#5s);
+END_FUNCTION_BLOCK
+
+{Test}
+METHOD PUBLIC Test_StartupComplete
+    // ✅ CORRECT: Only one timer - simple mock works perfectly
+    AxUnit.Mocking.Mock(NAME_OF(OnDelay), NAME_OF(OnDelayMock_true));
+    controller(enable := TRUE);
+    Equal(expected := TRUE, actual := controller.isReady);
+END_METHOD
+```
+
+**Example - All Timers Same State (✅ Correct Usage):**
+
+```iecst
+FUNCTION_BLOCK MultiTimerAllSame
+    VAR
+        timer1, timer2, timer3 : OnDelay;
+    END_VAR
+    // All timers must be elapsed
+    IF timer1.output AND timer2.output AND timer3.output THEN
+        allReady := TRUE;
+    END_IF;
+END_FUNCTION_BLOCK
+
+{Test}
+METHOD PUBLIC Test_AllTimersElapsed
+    // ✅ CORRECT: All timers need same state (all TRUE)
+    AxUnit.Mocking.Mock(NAME_OF(OnDelay), NAME_OF(OnDelayMock_true));
+    controller(enable := TRUE);
+    Equal(expected := TRUE, actual := controller.allReady);
+END_METHOD
+```
+
+**Example - Mixed Timer States (❌ Wrong Usage):**
+
+```iecst
+FUNCTION_BLOCK MixedTimerStates
+    VAR
+        timer1, timer2, timer3 : OnDelay;
+    END_VAR
+    // Need: timer1=TRUE, timer2=FALSE, timer3=TRUE
+END_FUNCTION_BLOCK
+
+{Test}
+METHOD PUBLIC Test_MixedStates
+    // ❌ WRONG: Simple mocks cannot create mixed states!
+    // All timers will be TRUE or all FALSE
+    AxUnit.Mocking.Mock(NAME_OF(OnDelay), NAME_OF(OnDelayMock_true));
+    
+    // ✅ SOLUTION: Use ConfigurableTimerMock or IdentifierBasedTimerMock instead!
+END_METHOD
+```
+
+📖 See [SimpleMocks_RealWorld_Test.st](test/SimpleMocks_RealWorld_Test.st) for complete examples.
+
+### Advanced Configurable Mocks
+
+#### ConfigurableTimerMock
+
+**Best for:** Sequential timers with consistent call order and **different states**
+
+- Supports up to 4 timer instances with **individual states**
+- Call-order based identification (1st call = T1, 2nd call = T2, etc.)
+- Works with timers having identical durations
+- Simple configuration
+
+📖 [Full Documentation](docs/ConfigurableTimerMock.md)
+
+```iecst
+payload.ResetCounter();
+
+// Timer 1: elapsed
+payload.T1_Enabled := TRUE;
+payload.T1_Output := TRUE;
+payload.T1_ElapsedTime := T#1s;
+
+// Timer 2: waiting (different state!)
+payload.T2_Enabled := TRUE;
+payload.T2_Output := FALSE;
+payload.T2_ElapsedTime := T#500ms;
+
+// Timer 3: elapsed
+payload.T3_Enabled := TRUE;
+payload.T3_Output := TRUE;
+payload.T3_ElapsedTime := T#5s;
+
+AxUnit.Mocking.Mock(
+    mockeeFn := NAME_OF(OnDelay), 
+    mockFn := NAME_OF(ConfigurableTimerMock),
+    payload := payload
+);
+```
+
+#### IdentifierBasedTimerMock
+
+**Best for:** Conditional timer logic (e.g., IF mode=1 THEN timer2 ELSE timer3)
+
+- Supports up to 4 timer instances with **individual states**
+- Position-based identification with explicit call positions
+- Perfect for conditional timer usage
+- Duration-independent
+
+📖 [Full Documentation](docs/IdentifierBasedTimerMock.md)
+
+```iecst
+payload.ResetCounter();
+
+// Position 1: Always called
+payload.T1_Enabled := TRUE;
+payload.T1_CallPosition := 1;
+payload.T1_Output := TRUE;
+
+// Position 2: Called in mode 1
+payload.T2_Enabled := TRUE;
+payload.T2_CallPosition := 2;
+payload.T2_Output := FALSE;
+
+// Position 2: Called in mode 2 (same position, different timer!)
+payload.T3_Enabled := TRUE;
+payload.T3_CallPosition := 2;
+payload.T3_Output := TRUE;
+
+AxUnit.Mocking.Mock(
+    mockeeFn := NAME_OF(OnDelay), 
+    mockFn := NAME_OF(IdentifierBasedTimerMock),
+    payload := payload
+);
+```
+
+#### OnDelayMock2Timer (Legacy)
+
+**Best for:** Simple two-timer scenarios (legacy support)
+
+- Supports exactly 2 timer instances
+- Duration-based identification
+- Payload-configurable states
+
+📖 [Documentation](docs/OnDelayMockWithTwoTimers.md)
+
+## Quick Start Examples
+
+### Example 1: Simple Single Timer Mock
 
 ```iecst
 USING System.Timer;
 USING AxUnit.Assert;
 
 NAMESPACE Simatic.Ax.Mocks
-    /// Function block that uses an OnDelay timer to set a status string.
     FUNCTION_BLOCK FunctionBlockWhichUsesTimer
         VAR_INPUT
             enable : BOOL;
@@ -56,7 +221,6 @@ NAMESPACE Simatic.Ax.Mocks
         ELSIF (NOT ton.signal) THEN
             timerStatus := 'IDLE';
         END_IF;
-        ;
     END_FUNCTION_BLOCK
 
     {TestFixture}
@@ -65,10 +229,9 @@ NAMESPACE Simatic.Ax.Mocks
             testInstance : FunctionBlockWhichUsesTimer;
         END_VAR
 
-        /// Tests that timerStatus is 'ELAPSED' when enabled and time has elapsed (using mock).
         {Test}
         METHOD PUBLIC FunctionBlockReturnsElapsedWhenEnabledAndTimeHasElapsed
-            // Mock the OnDelay timer to always return output = TRUE
+            // ✅ CORRECT: Single timer - simple mock is perfect
             AxUnit.Mocking.Mock(NAME_OF(OnDelay), NAME_OF(OnDelayMock_true));
             testInstance(enable := TRUE);
             Equal(expected := 'ELAPSED', actual := testInstance.timerStatus);
@@ -77,10 +240,149 @@ NAMESPACE Simatic.Ax.Mocks
 END_NAMESPACE
 ```
 
+### Example 2: Multiple Timers with Different States
+
+```iecst
+{Test}
+METHOD PUBLIC TestMultipleTimersWithDifferentStates
+    VAR
+        payload : ConfigurableTimerMockPayload;
+    END_VAR
+    
+    payload.ResetCounter();
+    
+    // T1: elapsed
+    payload.T1_Enabled := TRUE;
+    payload.T1_Output := TRUE;
+    payload.T1_ElapsedTime := T#10s;
+    
+    // T2: waiting (different state!)
+    payload.T2_Enabled := TRUE;
+    payload.T2_Output := FALSE;
+    payload.T2_ElapsedTime := T#5s;
+    
+    // T3: elapsed
+    payload.T3_Enabled := TRUE;
+    payload.T3_Output := TRUE;
+    payload.T3_ElapsedTime := T#30s;
+    
+    AxUnit.Mocking.Mock(
+        mockeeFn := NAME_OF(OnDelay), 
+        mockFn := NAME_OF(ConfigurableTimerMock),
+        payload := payload
+    );
+    
+    // Test your function block
+    myFB(enable1 := TRUE, enable2 := TRUE, enable3 := TRUE);
+    
+    Equal(expected := TRUE, actual := myFB.OutputT1);
+    Equal(expected := FALSE, actual := myFB.OutputT2);  // Different state!
+    Equal(expected := TRUE, actual := myFB.OutputT3);
+END_METHOD
+```
+
+### Example 3: Conditional Timers
+
+```iecst
+{Test}
+METHOD PUBLIC TestConditionalTimers
+    VAR
+        payload : IdentifierBasedTimerMockPayload;
+    END_VAR
+    
+    payload.ResetCounter();
+    
+    // Position 1: Always called
+    payload.T1_Enabled := TRUE;
+    payload.T1_CallPosition := 1;
+    payload.T1_Output := TRUE;
+    
+    // Position 2: Called in mode 1 OR mode 2 (different timers, same position)
+    payload.T2_Enabled := TRUE;
+    payload.T2_CallPosition := 2;
+    payload.T2_Output := TRUE;  // Mode 1 result
+    
+    AxUnit.Mocking.Mock(
+        mockeeFn := NAME_OF(OnDelay), 
+        mockFn := NAME_OF(IdentifierBasedTimerMock),
+        payload := payload
+    );
+    
+    // Test mode 1
+    myFB(mode := 1, enable := TRUE);
+END_METHOD
+```
+
+## Choosing the Right Mock
+
+| Scenario | Recommended Mock |
+|----------|------------------|
+| **Single timer** | `OnDelayMock_true` / `OnDelayMock_false` ✅ |
+| **Multiple timers, all same state** | `OnDelayMock_true` / `OnDelayMock_false` ✅ |
+| **Multiple timers, different states** | [`ConfigurableTimerMock`](docs/ConfigurableTimerMock.md) ✅ |
+| **Conditional timer logic (IF/CASE)** | [`IdentifierBasedTimerMock`](docs/IdentifierBasedTimerMock.md) ✅ |
+| **IEC 61131-3 standard timers** | `TON_Mock_true` / `TOF_Mock_false` ✅ |
+| **Legacy two-timer code** | `OnDelayMock2Timer` |
+
+## Testing Best Practices
+
+### Use Stateless Pattern
+
+Always use the stateless pattern to ensure test isolation:
+
+```iecst
+{TestFixture}
+CLASS MyTests
+    VAR
+        myFB, myFBStateless : MyFunctionBlock;
+        payload, payloadStateless : ConfigurableTimerMockPayload;
+    END_VAR
+
+    {TestSetup}
+    METHOD PUBLIC TestSetup
+        payload := payloadStateless;
+        myFB := myFBStateless;
+    END_METHOD
+END_CLASS
+```
+
+### Reset Counter Before Each Test
+
+For call-order based mocks, always reset the counter:
+
+```iecst
+{Test}
+METHOD PUBLIC MyTest
+    payload.ResetCounter();  // ← Essential!
+    // ... configure and test ...
+END_METHOD
+```
+
+## Documentation
+
+- [ConfigurableTimerMock](docs/ConfigurableTimerMock.md) - Call-order based mock for multiple timers
+- [IdentifierBasedTimerMock](docs/IdentifierBasedTimerMock.md) - Position-based mock for conditional logic
+- [OnDelayMockWithTwoTimers](docs/OnDelayMockWithTwoTimers.md) - Legacy two-timer mock
+- [TimerMocks-Overview](docs/TimerMocks-Overview.md) - Complete overview and decision guide
+
+## Tests
+
+All mocks include comprehensive test coverage. See the `test/` directory for examples:
+
+- [SimpleMocks_RealWorld_Test.st](test/SimpleMocks_RealWorld_Test.st) - **Real-world examples showing when to use simple mocks**
+- [IEC_TON_Mocks_Test.st](test/IEC_TON_Mocks_Test.st) - IEC TON timer tests
+- [IEC_TOF_Mocks_Test.st](test/IEC_TOF_Mocks_Test.st) - IEC TOF timer tests
+- [System_OnDelay_Mocks_Test.st](test/System_OnDelay_Mocks_Test.st) - System OnDelay tests
+- [System_OffDelay_Mocks_Test.st](test/System_OffDelay_Mocks_Test.st) - System OffDelay tests
+- [ConfigurableTimerMockTest.st](test/ConfigurableTimerMockTest.st) - Configurable mock tests
+- [IdentifierBasedTimerMockTest.st](test/IdentifierBasedTimerMockTest.st) - Identifier-based mock tests
+- [FooFB_ConfigurableMock_Test.st](test/FooFB_ConfigurableMock_Test.st) - Real-world example
+- [FooFB_IdentifierMock_Test.st](test/FooFB_IdentifierMock_Test.st) - Real-world example
+
 ## Markdownlint-cli
 
-This workspace will be checked by the [markdownlint-cli](https://github.com/igorshubovych/markdownlint-cli) (there is also documented ho to install the tool) tool in the CI workflow automatically.  
-To avoid, that the CI workflow fails because of the markdown linter, you can check all markdown files locally by running the markdownlint with:
+This workspace will be checked by the [markdownlint-cli](https://github.com/igorshubovych/markdownlint-cli) tool in the CI workflow automatically.  
+To avoid CI workflow failures, check all markdown files locally:
 
 ```sh
 markdownlint **/*.md --fix
@@ -88,7 +390,7 @@ markdownlint **/*.md --fix
 
 ## Contribution
 
-Thanks for your interest in contributing. Anybody is free to report bugs, unclear documentation, and other problems regarding this repository in the Issues section or, even better, is free to propose any changes to this repository using Merge Requests.
+Thanks for your interest in contributing. Anybody is free to report bugs, unclear documentation, and other problems regarding this repository in the Issues section or, even better, propose changes using Merge Requests.
 
 ## License and Legal information
 
