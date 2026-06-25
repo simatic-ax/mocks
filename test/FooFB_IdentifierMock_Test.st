@@ -9,7 +9,7 @@ NAMESPACE Simatic.Ax.Mocks
     CLASS TestFbWithThreeTimers_IdentifierMock
         VAR
             myFB, myFBStateless : FbWithThreeTimers;
-            payload, payloadStateless : IdentifierBasedTimerMockPayload;
+            payload, payloadStateless : IdentifierBasedOnDelayMockPayload;
         END_VAR
 
         /// Setup method to reset instances before each test
@@ -48,7 +48,7 @@ NAMESPACE Simatic.Ax.Mocks
             // Apply mock
             AxUnit.Mocking.Mock(
                 mockeeFn := NAME_OF(OnDelay), 
-                mockFn := NAME_OF(IdentifierBasedTimerMock),
+                mockFn := NAME_OF(IdentifierBasedOnDelayMock),
                 payload := payload
             );
             
@@ -88,7 +88,7 @@ NAMESPACE Simatic.Ax.Mocks
             // Apply mock
             AxUnit.Mocking.Mock(
                 mockeeFn := NAME_OF(OnDelay), 
-                mockFn := NAME_OF(IdentifierBasedTimerMock),
+                mockFn := NAME_OF(IdentifierBasedOnDelayMock),
                 payload := payload
             );
             
@@ -128,7 +128,7 @@ NAMESPACE Simatic.Ax.Mocks
             // Apply mock
             AxUnit.Mocking.Mock(
                 mockeeFn := NAME_OF(OnDelay), 
-                mockFn := NAME_OF(IdentifierBasedTimerMock),
+                mockFn := NAME_OF(IdentifierBasedOnDelayMock),
                 payload := payload
             );
             
@@ -162,7 +162,7 @@ NAMESPACE Simatic.Ax.Mocks
             // Apply mock
             AxUnit.Mocking.Mock(
                 mockeeFn := NAME_OF(OnDelay), 
-                mockFn := NAME_OF(IdentifierBasedTimerMock),
+                mockFn := NAME_OF(IdentifierBasedOnDelayMock),
                 payload := payload
             );
             
@@ -203,7 +203,7 @@ NAMESPACE Simatic.Ax.Mocks
             // Apply mock
             AxUnit.Mocking.Mock(
                 mockeeFn := NAME_OF(OnDelay), 
-                mockFn := NAME_OF(IdentifierBasedTimerMock),
+                mockFn := NAME_OF(IdentifierBasedOnDelayMock),
                 payload := payload
             );
             
@@ -247,7 +247,7 @@ NAMESPACE Simatic.Ax.Mocks
             // Apply mock
             AxUnit.Mocking.Mock(
                 mockeeFn := NAME_OF(OnDelay), 
-                mockFn := NAME_OF(IdentifierBasedTimerMock),
+                mockFn := NAME_OF(IdentifierBasedOnDelayMock),
                 payload := payload
             );
             

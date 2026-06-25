@@ -2,7 +2,19 @@
 
 ## Overview
 
-The `ConfigurableTimerMock` is a flexible mock for System Timer function blocks (OnDelay, OffDelay) that allows you to configure up to 4 different timer instances with individual states. This is particularly useful when testing function blocks that use multiple timers.
+The `ConfigurableOnDelayMock` family provides flexible mocks for timer function blocks that allow you to configure up to 4 different timer instances with individual states. This is particularly useful when testing function blocks that use multiple timers.
+
+## Available Mocks
+
+### System.Timer Interface (signal/duration)
+
+- **`ConfigurableOnDelayMock`** - For `OnDelay` timers
+- **`ConfigurableOffDelayMock`** - For `OffDelay` timers
+
+### IEC 61131-3 Interface (IN/PT)
+
+- **`ConfigurableTONMock`** - For `TON` (On-Delay) timers
+- **`ConfigurableTOFMock`** - For `TOF` (Off-Delay) timers
 
 **Important:** Timers are identified by their **call order**, not by duration. This means the 1st timer call maps to T1, the 2nd call to T2, etc. This allows testing multiple timers even if they have the same duration.
 
@@ -13,7 +25,7 @@ The `ConfigurableTimerMock` is a flexible mock for System Timer function blocks 
 - **Works with identical durations** - Multiple timers can have the same duration
 - **Individual timer control** - Each timer can be enabled/disabled and configured separately
 - **Full state control** - Set output state and elapsed time for each timer
-- **Compatible with OnDelay and OffDelay** - Works with both System.Timer types
+- **Multiple timer types supported** - OnDelay, OffDelay, TON, TOF
 
 ## Usage
 
@@ -21,7 +33,7 @@ The `ConfigurableTimerMock` is a flexible mock for System Timer function blocks 
 
 ```iec-st
 VAR
-    payload : ConfigurableTimerMockPayload;
+    payload : ConfigurableOnDelayMockPayload;
 END_VAR
 
 // Reset counter before each test
@@ -37,17 +49,44 @@ payload.T2_Enabled := TRUE;
 payload.T2_Output := FALSE;
 payload.T2_ElapsedTime := T#500ms;
 
-// Apply the mock
+// Apply the mock for OnDelay
 AxUnit.Mocking.Mock(
     mockeeFn := NAME_OF(OnDelay),
-    mockFn := NAME_OF(ConfigurableTimerMock),
+    mockFn := NAME_OF(ConfigurableOnDelayMock),
     payload := payload
+);
+
+// Or for OffDelay
+AxUnit.Mocking.Mock(
+    mockeeFn := NAME_OF(OffDelay),
+    mockFn := NAME_OF(ConfigurableOffDelayMock),
+    payload := ConfigurableOffDelayMockPayload
+);
+
+// Or for TON (IEC)
+AxUnit.Mocking.Mock(
+    mockeeFn := NAME_OF(TON_Mock_true),
+    mockFn := NAME_OF(ConfigurableTONMock),
+    payload := ConfigurableTONMockPayload
+);
+
+// Or for TOF (IEC)
+AxUnit.Mocking.Mock(
+    mockeeFn := NAME_OF(TOF_Mock_true),
+    mockFn := NAME_OF(ConfigurableTOFMock),
+    payload := ConfigurableTOFMockPayload
 );
 ```
 
 ### Payload Configuration
 
-The `ConfigurableTimerMockPayload` class provides the following properties for each timer (T1-T4):
+Each mock has its own payload class:
+- `ConfigurableOnDelayMockPayload` - For OnDelay
+- `ConfigurableOffDelayMockPayload` - For OffDelay
+- `ConfigurableTONMockPayload` - For TON
+- `ConfigurableTOFMockPayload` - For TOF
+
+All payload classes provide the following properties for each timer (T1-T4):
 
 | Property | Type | Description |
 |----------|------|-------------|
@@ -106,12 +145,18 @@ payload.T3_Enabled := FALSE;  // 3rd call returns FALSE
 6. When a match is found and the timer is enabled, it returns the configured output and elapsed time
 7. If not enabled or counter > 4, it returns FALSE and 0ms as defaults
 
-## Complete Test Example
+## Complete Test Examples
 
-See [`ConfigurableTimerMockTest.st`](../test/ConfigurableTimerMockTest.st) for complete test examples demonstrating:
+See the following test files for complete examples:
 
+- [`ConfigurableOnDelayMockTest.st`](../test/System/Timer/ConfigurableOnDelayMockTest.st) - OnDelay examples
+- [`ConfigurableOffDelayMockTest.st`](../test/System/Timer/ConfigurableOffDelayMockTest.st) - OffDelay examples
+- [`ConfigurableTONMockTest.st`](../test/IEC/Timer/ConfigurableTONMockTest.st) - TON examples
+- [`ConfigurableTOFMockTest.st`](../test/IEC/Timer/ConfigurableTOFMockTest.st) - TOF examples
+
+All demonstrate:
 - Multiple timers with different states
-- All timers elapsed
+- All timers in same state
 - Selective timer configuration
 
 ## Important Notes
@@ -167,6 +212,12 @@ timer3(signal := ..., duration := T#1s);  // ← 3rd call = T3 (same duration!)
 
 ## See Also
 
-- [`OnDelayMock_true`](../src/System/Timer/OnDelayMock_true.st) - Simple mock that always returns TRUE
-- [`OnDelayMock_false`](../src/System/Timer/OnDelayMock_false.st) - Simple mock that always returns FALSE
-- [`IdentifierBasedTimerMock`](../src/System/Timer/IdentifierBasedTimerMock.st) - Position-based mock for conditional logic
+- **Simple Mocks:**
+  - [`OnDelayMock_true/false`](../src/System/Timer/) - System.Timer simple mocks
+  - [`TON_Mock_true/false`](../src/IEC/Timer/) - IEC TON simple mocks
+  - [`TOF_Mock_true/false`](../src/IEC/Timer/) - IEC TOF simple mocks
+- **Position-based Mocks:**
+  - [`IdentifierBasedOnDelayMock`](../src/System/Timer/IdentifierBasedOnDelayMock.st) - For OnDelay
+  - [`IdentifierBasedOffDelayMock`](../src/System/Timer/IdentifierBasedOffDelayMock.st) - For OffDelay
+  - [`IdentifierBasedTONMock`](../src/IEC/Timer/IdentifierBasedTONMock.st) - For TON
+  - [`IdentifierBasedTOFMock`](../src/IEC/Timer/IdentifierBasedTOFMock.st) - For TOF

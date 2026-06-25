@@ -1,9 +1,8 @@
 NAMESPACE Simatic.Ax.Mocks
-    /// Configurable Timer Mock for up to 4 timer instances
+    /// Configurable Timer Mock for System.Timer.OffDelay - up to 4 timer instances
     /// Uses payload to configure individual timer states
-    /// Can be used for both OnDelay and OffDelay timers
     /// Timers are identified by call order (instance counter)
-    FUNCTION_BLOCK ConfigurableTimerMock
+    FUNCTION_BLOCK ConfigurableOffDelayMock
         VAR_INPUT
             duration : LTIME;       // Preset duration
             signal : BOOL;          // Input signal
@@ -13,7 +12,7 @@ NAMESPACE Simatic.Ax.Mocks
             elapsedTime : LTIME;    // Elapsed time
         END_VAR
         VAR_TEMP
-            state : REF_TO ConfigurableTimerMockPayload;
+            state : REF_TO ConfigurableOffDelayMockPayload;
         END_VAR
 
         // Get payload configuration
@@ -50,10 +49,10 @@ NAMESPACE Simatic.Ax.Mocks
 
     END_FUNCTION_BLOCK
 
-    /// Payload configuration for ConfigurableTimerMock
-    /// Allows configuration of up to 4 timer instances
+    /// Payload configuration for ConfigurableOffDelayMock
+    /// Allows configuration of up to 4 OffDelay timer instances
     /// Timers are identified by their call order (1st call = T1, 2nd call = T2, etc.)
-    CLASS ConfigurableTimerMockPayload IMPLEMENTS AxUnit.Mocking.IPayload
+    CLASS ConfigurableOffDelayMockPayload IMPLEMENTS AxUnit.Mocking.IPayload
         VAR PUBLIC
             // Internal call counter to track timer instances
             CallCounter : INT := 0;             // Tracks which timer instance is being called

@@ -45,12 +45,12 @@ NAMESPACE Simatic.Ax.Mocks
         END_IF;
     END_FUNCTION_BLOCK
 
-    /// Test fixture demonstrating ConfigurableTimerMock usage
+    /// Test fixture demonstrating ConfigurableOnDelayMock usage
     {TestFixture}
-    CLASS TestConfigurableTimerMock
+    CLASS TestConfigurableOnDelayMock
         VAR
             testInstance, testInstanceStateless : MultiTimerFunctionBlock;
-            payload, payloadStateless : ConfigurableTimerMockPayload;
+            payload, payloadStateless : ConfigurableOnDelayMockPayload;
         END_VAR
 
         /// Setup method to reset instances before each test
@@ -83,7 +83,7 @@ NAMESPACE Simatic.Ax.Mocks
             // Apply mock with payload
             AxUnit.Mocking.Mock(
                 mockeeFn := NAME_OF(OnDelay),
-                mockFn := NAME_OF(ConfigurableTimerMock),
+                mockFn := NAME_OF(ConfigurableOnDelayMock),
                 payload := payload
             );
             
@@ -119,7 +119,7 @@ NAMESPACE Simatic.Ax.Mocks
             // Apply mock with payload
             AxUnit.Mocking.Mock(
                 mockeeFn := NAME_OF(OnDelay),
-                mockFn := NAME_OF(ConfigurableTimerMock),
+                mockFn := NAME_OF(ConfigurableOnDelayMock),
                 payload := payload
             );
             
@@ -150,7 +150,7 @@ NAMESPACE Simatic.Ax.Mocks
             // Apply mock with payload
             AxUnit.Mocking.Mock(
                 mockeeFn := NAME_OF(OnDelay),
-                mockFn := NAME_OF(ConfigurableTimerMock),
+                mockFn := NAME_OF(ConfigurableOnDelayMock),
                 payload := payload
             );
             

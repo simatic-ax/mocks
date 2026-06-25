@@ -13,14 +13,28 @@
 
 #### Advanced Configurable Timer Mocks
 
-- `ConfigurableTimerMock` - Call-order based mock supporting up to 4 timer instances
+**ConfigurableOnDelayMock Family** - Call-order based mocks supporting up to 4 timer instances
+
+- `ConfigurableOnDelayMock` + `ConfigurableOnDelayMockPayload` - For System.Timer.OnDelay
+- `ConfigurableOffDelayMock` + `ConfigurableOffDelayMockPayload` - For System.Timer.OffDelay
+- `ConfigurableTONMock` + `ConfigurableTONMockPayload` - For IEC TON timers
+- `ConfigurableTOFMock` + `ConfigurableTOFMockPayload` - For IEC TOF timers
+
+Features:
   - Identifies timers by call sequence (1st, 2nd, 3rd, 4th call)
   - Works with timers having identical durations
   - Simple payload-based configuration
   - Includes `ResetCounter()` method for test isolation
   - **Each timer can have individual state** (unlike simple mocks)
 
-- `IdentifierBasedTimerMock` - Position-based mock for conditional timer logic
+**IdentifierBasedOnDelayMock Family** - Position-based mocks for conditional timer logic
+
+- `IdentifierBasedOnDelayMock` + `IdentifierBasedOnDelayMockPayload` - For System.Timer.OnDelay
+- `IdentifierBasedOffDelayMock` + `IdentifierBasedOffDelayMockPayload` - For System.Timer.OffDelay
+- `IdentifierBasedTONMock` + `IdentifierBasedTONMockPayload` - For IEC TON timers
+- `IdentifierBasedTOFMock` + `IdentifierBasedTOFMockPayload` - For IEC TOF timers
+
+Features:
   - Supports up to 4 timer instances with explicit call positions
   - Perfect for conditional timer usage (IF/CASE statements)
   - Duration-independent identification
@@ -29,8 +43,8 @@
 
 #### Documentation
 
-- Added comprehensive documentation for `ConfigurableTimerMock`
-- Added comprehensive documentation for `IdentifierBasedTimerMock`
+- Added comprehensive documentation for `ConfigurableOnDelayMock`
+- Added comprehensive documentation for `IdentifierBasedOnDelayMock`
 - Added complete overview documentation (`TimerMocks-Overview.md`)
 - Updated README.md with complete mock overview and usage examples
 - **Added important limitation notes for simple mocks** (only for single timer or all same state)
@@ -41,8 +55,16 @@
 - Added comprehensive tests for IEC TOF mocks (`IEC_TOF_Mocks_Test.st`)
 - Added comprehensive tests for System OnDelay mocks (`System_OnDelay_Mocks_Test.st`)
 - Added comprehensive tests for System OffDelay mocks (`System_OffDelay_Mocks_Test.st`)
-- Added tests for ConfigurableTimerMock (`ConfigurableTimerMockTest.st`)
-- Added tests for IdentifierBasedTimerMock (`IdentifierBasedTimerMockTest.st`)
+- Added tests for ConfigurableOnDelayMock family:
+  - `ConfigurableOnDelayMockTest.st` - OnDelay tests
+  - `ConfigurableOffDelayMockTest.st` - OffDelay tests
+  - `ConfigurableTONMockTest.st` - TON tests
+  - `ConfigurableTOFMockTest.st` - TOF tests
+- Added tests for IdentifierBasedOnDelayMock family:
+  - `IdentifierBasedOnDelayMockTest.st` - OnDelay tests
+  - `IdentifierBasedOffDelayMockTest.st` - OffDelay tests
+  - `IdentifierBasedTONMockTest.st` - TON tests
+  - `IdentifierBasedTOFMockTest.st` - TOF tests
 - Added real-world example tests for FbWithThreeTimers using ConfigurableTimerMock
 - Added real-world example tests for FbWithThreeTimers using IdentifierBasedTimerMock
 - **Added real-world tests demonstrating correct usage of simple mocks** (`SimpleMocks_RealWorld_Test.st`)

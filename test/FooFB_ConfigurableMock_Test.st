@@ -9,7 +9,7 @@ NAMESPACE Simatic.Ax.Mocks
     CLASS TestFbWithThreeTimers_ConfigurableMock
         VAR
             myFB, myFBStateless : FbWithThreeTimers;
-            payload, payloadStateless : ConfigurableTimerMockPayload;
+            payload, payloadStateless : ConfigurableOnDelayMockPayload;
         END_VAR
 
         /// Setup method to reset instances before each test
@@ -44,7 +44,7 @@ NAMESPACE Simatic.Ax.Mocks
             // Apply mock
             AxUnit.Mocking.Mock(
                 mockeeFn := NAME_OF(OnDelay), 
-                mockFn := NAME_OF(ConfigurableTimerMock),
+                mockFn := NAME_OF(ConfigurableOnDelayMock),
                 payload := payload
             );
             
@@ -81,7 +81,7 @@ NAMESPACE Simatic.Ax.Mocks
             // Apply mock
             AxUnit.Mocking.Mock(
                 mockeeFn := NAME_OF(OnDelay), 
-                mockFn := NAME_OF(ConfigurableTimerMock),
+                mockFn := NAME_OF(ConfigurableOnDelayMock),
                 payload := payload
             );
             
@@ -118,7 +118,7 @@ NAMESPACE Simatic.Ax.Mocks
             // Apply mock
             AxUnit.Mocking.Mock(
                 mockeeFn := NAME_OF(OnDelay), 
-                mockFn := NAME_OF(ConfigurableTimerMock),
+                mockFn := NAME_OF(ConfigurableOnDelayMock),
                 payload := payload
             );
             
@@ -151,7 +151,7 @@ NAMESPACE Simatic.Ax.Mocks
             // Apply mock
             AxUnit.Mocking.Mock(
                 mockeeFn := NAME_OF(OnDelay), 
-                mockFn := NAME_OF(ConfigurableTimerMock),
+                mockFn := NAME_OF(ConfigurableOnDelayMock),
                 payload := payload
             );
             
@@ -188,7 +188,7 @@ NAMESPACE Simatic.Ax.Mocks
             // Apply mock
             AxUnit.Mocking.Mock(
                 mockeeFn := NAME_OF(OnDelay), 
-                mockFn := NAME_OF(ConfigurableTimerMock),
+                mockFn := NAME_OF(ConfigurableOnDelayMock),
                 payload := payload
             );
             

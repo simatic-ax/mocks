@@ -1,8 +1,8 @@
 NAMESPACE Simatic.Ax.Mocks
-    /// Identifier-based Timer Mock for up to 4 timer instances
-    /// Timers are identified by a unique ID passed via a special mechanism
+    /// Identifier-based Timer Mock for System.Timer.OnDelay - up to 4 timer instances
+    /// Timers are identified by their call position
     /// This allows testing conditional timer usage without duration dependency
-    FUNCTION_BLOCK IdentifierBasedTimerMock
+    FUNCTION_BLOCK IdentifierBasedOnDelayMock
         VAR_INPUT
             duration : LTIME;       // Preset duration
             signal : BOOL;          // Input signal
@@ -12,7 +12,7 @@ NAMESPACE Simatic.Ax.Mocks
             elapsedTime : LTIME;    // Elapsed time
         END_VAR
         VAR_TEMP
-            state : REF_TO IdentifierBasedTimerMockPayload;
+            state : REF_TO IdentifierBasedOnDelayMockPayload;
             matched : BOOL;
         END_VAR
 
@@ -63,10 +63,10 @@ NAMESPACE Simatic.Ax.Mocks
 
     END_FUNCTION_BLOCK
 
-    /// Payload configuration for IdentifierBasedTimerMock
+    /// Payload configuration for IdentifierBasedOnDelayMock
     /// Each timer is configured with its expected call position
     /// This allows flexible testing of conditional timer logic
-    CLASS IdentifierBasedTimerMockPayload IMPLEMENTS AxUnit.Mocking.IPayload
+    CLASS IdentifierBasedOnDelayMockPayload IMPLEMENTS AxUnit.Mocking.IPayload
         VAR PUBLIC
             // Internal call counter
             CallCounter : INT := 0;               // Tracks current call number
