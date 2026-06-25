@@ -207,27 +207,6 @@ payload.T3_CallPosition := 2;  // At position 2 in mode 2 (same position!)
 payload.T3_Output := TRUE;
 ```
 
-#### OnDelayMock2Timer (Legacy)
-
-**Identification:** Duration-based (2 timers only)
-
-**Best for:**
-
-- Legacy code with exactly 2 timers
-- Simple two-timer scenarios
-
-**Features:**
-
-- ✅ Simple payload configuration
-- ✅ Duration-based matching
-- ⚠️ Limited to 2 timers
-- ⚠️ Requires unique durations
-
-**Files:**
-
-- Implementation: [OnDelayMockWithTwoTimers.st](../src/System/Timer/OnDelayMockWithTwoTimers.st)
-- Documentation: [OnDelayMockWithTwoTimers.md](OnDelayMockWithTwoTimers.md)
-
 ## Decision Guide
 
 ### Flowchart: Choosing the Right Mock
@@ -248,9 +227,6 @@ Start
   │   │
   │   ├─ Conditional timer logic (IF/CASE)?
   │   │   └─ YES → Use IdentifierBasedTimerMock ✅
-  │   │
-  │   └─ Exactly 2 timers (legacy)?
-  │       └─ YES → Use OnDelayMock2Timer
 ```
 
 ### Comparison Table

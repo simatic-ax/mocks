@@ -169,4 +169,4 @@ timer3(signal := ..., duration := T#1s);  // ← 3rd call = T3 (same duration!)
 
 - [`OnDelayMock_true`](../src/System/Timer/OnDelayMock_true.st) - Simple mock that always returns TRUE
 - [`OnDelayMock_false`](../src/System/Timer/OnDelayMock_false.st) - Simple mock that always returns FALSE
-- [`OnDelayMock2Timer`](../src/System/Timer/OnDelayMockWithTwoTimers.st) - Legacy two-timer mock (duration-based)
+- [`IdentifierBasedTimerMock`](../src/System/Timer/IdentifierBasedTimerMock.st) - Position-based mock for conditional logic

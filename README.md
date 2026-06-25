@@ -7,7 +7,7 @@ This package provides comprehensive predefined mocks for the AXUnit testing fram
 ## Install this package
 
 ```cli
-apax add @simatic-ax/mocks
+apax add @simatic-ax/mocks --dev
 ```
 
 ## Namespace
@@ -182,16 +182,6 @@ AxUnit.Mocking.Mock(
 );
 ```
 
-#### OnDelayMock2Timer (Legacy)
-
-**Best for:** Simple two-timer scenarios (legacy support)
-
-- Supports exactly 2 timer instances
-- Duration-based identification
-- Payload-configurable states
-
-📖 [Documentation](docs/OnDelayMockWithTwoTimers.md)
-
 ## Quick Start Examples
 
 ### Example 1: Simple Single Timer Mock
@@ -322,7 +312,6 @@ END_METHOD
 | **Multiple timers, different states** | [`ConfigurableTimerMock`](docs/ConfigurableTimerMock.md) ✅ |
 | **Conditional timer logic (IF/CASE)** | [`IdentifierBasedTimerMock`](docs/IdentifierBasedTimerMock.md) ✅ |
 | **IEC 61131-3 standard timers** | `TON_Mock_true` / `TOF_Mock_false` ✅ |
-| **Legacy two-timer code** | `OnDelayMock2Timer` |
 
 ## Testing Best Practices
 
@@ -362,7 +351,6 @@ END_METHOD
 
 - [ConfigurableTimerMock](docs/ConfigurableTimerMock.md) - Call-order based mock for multiple timers
 - [IdentifierBasedTimerMock](docs/IdentifierBasedTimerMock.md) - Position-based mock for conditional logic
-- [OnDelayMockWithTwoTimers](docs/OnDelayMockWithTwoTimers.md) - Legacy two-timer mock
 - [TimerMocks-Overview](docs/TimerMocks-Overview.md) - Complete overview and decision guide
 
 ## Tests
