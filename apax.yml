@@ -24,10 +24,10 @@ catalogs:
   "@ax/simatic-ax": 2510.7.0
 devDependencies:
   "@ax/sdk": ^2510.7.0
-  "@simatic-ax/snippetscollection": ^1.0.0
-dependencies:
   "@ax/system-timer": ^10.3.25
   "@ax/system": ^10.3.25
+  "@simatic-ax/snippetscollection": ^1.0.0
+dependencies:
   "@ax/axunit-mocking": ^9.2.28
 
 files:
