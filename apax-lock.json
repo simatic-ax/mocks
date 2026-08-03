@@ -260,9 +260,9 @@
     },
     "@ax/iec-docs": {
       "name": "@ax/iec-docs",
-      "version": "10.4.16",
-      "integrity": "sha512-KjvTtbdExTvPDQlu0sPuJp0usbtUD8yYJsFGchwbSP2g1wlEHttv/Dw06z2WHt1iATrD21ac2YqP8UzSNSFQ2Q==",
-      "resolved": "https://registry.simatic-ax.siemens.io/@ax/iec-docs/-/iec-docs-10.4.16.tgz",
+      "version": "10.4.66",
+      "integrity": "sha512-UmP0mzQuOZ0/Vm7YKXQYVLifLrfmV3x4RqBoU4fueSlIy6W3q6AtCkjKvhF4xewF1JQeaK5j0NvIcAY4y/9ihQ==",
+      "resolved": "https://registry.simatic-ax.siemens.io/@ax/iec-docs/-/iec-docs-10.4.66.tgz",
       "dependencies": {}
     },
     "@ax/mocking-library": {
