@@ -27,4 +27,4 @@ files:
   - 'README.md'
   - 'LICENSE.md'
   - 'docs'
-  - 'out/Debug/llvm'
+  - 'src'
