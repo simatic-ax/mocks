@@ -64,7 +64,7 @@ jobs:
         uses: simatic-ax/actions/apax-test@v4
         with:
           coverage: true
-          loglevel: debug
+          log-level: debug
 
       - name: Check links
         uses: gaurav-nelson/github-action-markdown-link-check@v1
@@ -78,5 +78,5 @@ jobs:
         with:
           name: build-artifacts
           path: |
-            bin/llvm
+            out/Debug/llvm
           retention-days: 90
