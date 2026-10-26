@@ -10,7 +10,6 @@ on:
 permissions:
   contents: write    # required for checkout
   packages: write    # required for pulling the container
-  actions: write     # required for artifact downloading
   pull-requests: write # Für PR-Erstellung und Management
 
 jobs:
@@ -38,15 +37,6 @@ jobs:
         with:
           ref: ${{ github.event.release.target_commitish }}
           fetch-depth: 0
-
-      - name: Create bin folder
-        run: mkdir -p bin
-
-      # - name: Download build artifacts
-      #   uses: actions/download-artifact@v4
-      #   with:
-      #     name: build-artifacts
-      #     path: bin
 
       - name: Version package
         uses: simatic-ax/actions/apax-version@v4

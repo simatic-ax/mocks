@@ -5,14 +5,7 @@ type: lib
 # Description will be displayed in the apax extension
 description: This library contains a collection of mocks
 variables:
-  APAX_BUILD_ARGS:
-    - '--log Debug'
-    - --debug
-
   GITHUB_REG_URL: "https://npm.pkg.github.com"
-targets:
-
-  - 'llvm'
 registries:
   '@simatic-ax': 'https://npm.pkg.github.com/'
 # Dependencies
@@ -21,17 +14,17 @@ publicKeys:
     "v1": "3792a7e926775425ccdd29ceed8c368c3008b5b33d7d5550b3cb1f58093e1dff"
     "v2": "7af3e394eb2b285a3d99ab8e1f745cc6db75704b30a80393339c721a92ffffd9"
 catalogs:
-  "@ax/simatic-ax": 2510.17.0
+  "@ax-as/s7-catalog": 2610.0.0
 devDependencies:
-  "@ax/sdk": ^2510.7.0
-  "@ax/system-timer": ^10.3.25
-  "@ax/system": ^10.3.25
+  "@ax-as/s7-sdk": ^2610.0.0
+  "@ax-as/system-timer-lib": ^11.0.232
+  "@ax-as/system-lib": ^11.0.232
   "@simatic-ax/snippetscollection": ^1.0.0
 dependencies:
-  "@ax/axunit-mocking": ^9.2.28
+  "@ax-as/axunit-mocking": ^10.0.136
 
 files:
   - 'README.md'
   - 'LICENSE.md'
   - 'docs'
-  - 'bin/llvm'
+  - 'src'

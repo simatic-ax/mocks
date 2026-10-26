@@ -7,3 +7,5 @@
 *.tracerec.json
 obj/
 /.vs
+.apax/
+out/
